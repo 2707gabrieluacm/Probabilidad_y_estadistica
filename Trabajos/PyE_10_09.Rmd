@@ -1,0 +1,290 @@
+---
+title: "Clase P y E 10/09"
+author: "Ortiz Cruz José Gabriel"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: cosmo
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Generación de números aleatorios uniformes
+
+## Generación de 10 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(10, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="blue", pch=16, main="10 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 6), "segundos\n")
+```
+
+## Generación de 100 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(100, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="forestgreen", pch=16, main="100 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 6), "segundos\n")
+```
+
+## Generación de 1,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(1000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="mediumpurple", pch=16, cex=0.8, main="1,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 6), "segundos\n")
+```
+
+## Generación de 10,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(10000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="gold3", pch=16, cex=0.6, main="10,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 5), "segundos\n")
+```
+
+## Generación de 25,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(25000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="darkgreen", pch=16, cex=0.5, main="25,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 5), "segundos\n")
+```
+
+## Generación de 50,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(50000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="darkorange", pch=16, cex=0.4, main="50,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 5), "segundos\n")
+```
+
+## Generación de 100,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(100000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="firebrick", pch=16, cex=0.3, main="100,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 5), "segundos\n")
+```
+
+## Generación de 250,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(250000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="navy", pch=16, cex=0.3, main="250,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+## Generación de 500,000 VA uniformes
+```{r}
+tiempo_inicio <- Sys.time()
+u <- runif(500000, 0,1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u,20)
+plot(u, col="gray40", pch=16, cex=0.2, main="500,000 Variables Aleatorias Uniformes")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+## Extracción de muestras
+```{r}
+Muestra1 <- sample(u,100,replace = FALSE)
+plot(Muestra1, main="Muestra de Tamaño 100", xlab="Elementos de la muestra", 
+     ylab="Uniformes(0,1)", col="purple3", pch=16)
+```
+
+### Histograma
+```{r}
+hist(u, col=rainbow(20, 0.7), main="Histograma de 500,000 VA Uniformes", 
+     xlab="Valores", ylab="Frecuencia", border="white")
+```
+
+```{r}
+hist(Muestra1, col="lightgreen", main="Histograma Muestra 1", 
+     xlab="Valores", ylab="Frecuencia", border="darkgreen")
+```
+
+## Muestra 2
+```{r}
+Muestra2 <- sample(u,250,replace = FALSE)
+plot(Muestra2, main="Muestra de tamaño 250", xlab="Elementos de la muestra", 
+     ylab="Uniformes(0,1)", col="purple3", pch=16)
+```
+
+### Histograma
+```{r}
+hist(u, col=rainbow(20, 0.7), main="Histograma de 500,000 VA Uniformes", 
+     xlab="Valores", ylab="Frecuencia", border="white")
+```
+
+```{r}
+hist(Muestra2, col="lightblue", main="Histograma Muestra 2", 
+     xlab="Valores", ylab="Frecuencia", border="darkblue")
+```
+
+# Generación de números aleatorios normales
+
+## Generación de 10 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u <- rnorm(10, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u, 20)
+plot(u, col="steelblue", pch=16, main="10 Variables Aleatorias Normales(0,1)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 6), "segundos\n")
+```
+
+## Generación de 100 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u <- rnorm(100, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u, 20)
+plot(u, col="darkslateblue", pch=16, main="100 Variables Aleatorias Normales(0,1)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 6), "segundos\n")
+```
+
+### Histograma
+```{r}
+hist(u, col="lightsteelblue", main="Histograma 100 VA Normales", 
+     xlab="Valores", ylab="Frecuencia", border="darkblue")
+```
+
+## Generación de 1,000,000 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u_1m <- rnorm(1000000, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u_1m, 20)
+plot(sample(u_1m, 10000), col="darkgreen", pch=16, cex=0.5, 
+     main="1,000,000 VA Normales (muestra de 10,000)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+### Histograma
+```{r}
+hist(u_1m, col="lightgreen", main="Histograma 1,000,000 VA Normales", 
+     xlab="Valores", ylab="Frecuencia", border="darkgreen", breaks=50)
+```
+
+## Generación de 2,000,000 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u_2m <- rnorm(2000000, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u_2m, 20)
+plot(sample(u_2m, 10000), col="darkorange", pch=16, cex=0.5, 
+     main="2,000,000 VA Normales (muestra de 10,000)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+### Histograma
+```{r}
+hist(u_2m, col="lightsalmon", main="Histograma 2,000,000 VA Normales", 
+     xlab="Valores", ylab="Frecuencia", border="darkorange", breaks=50)
+```
+
+## Generación de 3,000,000 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u_3m <- rnorm(3000000, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u_3m, 20)
+plot(sample(u_3m, 10000), col="darkred", pch=16, cex=0.5, 
+     main="3,000,000 VA Normales (muestra de 10,000)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+### Histograma
+```{r}
+hist(u_3m, col="lightcoral", main="Histograma 3,000,000 VA Normales", 
+     xlab="Valores", ylab="Frecuencia", border="darkred", breaks=50)
+```
+
+## Generación de 4,000,000 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u_4m <- rnorm(4000000, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u_4m, 20)
+plot(sample(u_4m, 10000), col="purple4", pch=16, cex=0.5, 
+     main="4,000,000 VA Normales (muestra de 10,000)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+### Histograma
+```{r}
+hist(u_4m, col="plum", main="Histograma 4,000,000 VA Normales", 
+     xlab="Valores", ylab="Frecuencia", border="purple4", breaks=50)
+```
+
+## Generación de 5,000,000 VA normales(0,1)
+```{r}
+tiempo_inicio <- Sys.time()
+u_5m <- rnorm(5000000, 0, 1)
+tiempo_fin <- Sys.time()
+tiempo_transcurrido <- tiempo_fin - tiempo_inicio
+
+head(u_5m, 20)
+plot(sample(u_5m, 10000), col="maroon", pch=16, cex=0.5, 
+     main="5,000,000 VA Normales (muestra de 10,000)")
+cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segundos\n")
+```
+
+### Histograma
+```{r}
+hist(u_5m, col="mistyrose", main="Histograma 5,000,000 VA Normales", 
+     xlab="Valores", ylab="Frecuencia", border="maroon", breaks=50)
+```
