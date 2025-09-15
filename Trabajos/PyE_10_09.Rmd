@@ -11,6 +11,9 @@ output:
     theme: cosmo
   word_document: default
 ---
+```{r tiempo-total-inicio, include=FALSE}
+tiempo_total_inicio <- Sys.time()
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -287,4 +290,31 @@ cat("Tiempo de generación:", round(as.numeric(tiempo_transcurrido), 4), "segund
 ```{r}
 hist(u_5m, col="mistyrose", main="Histograma 5,000,000 VA Normales", 
      xlab="Valores", ylab="Frecuencia", border="maroon", breaks=50)
+```
+
+# Comparar 4 histogramas en 2x2
+
+```{r}
+layout(matrix(c(1,2,3,4), 2, 2, byrow=TRUE))
+hist(u_1m, main="1M", col="coral")
+hist(u_2m, main="2M", col="lightblue")
+hist(u_3m, main="3M", col="lightgreen") 
+hist(u_4m, main="4M", col="plum")
+```
+
+```{r}
+plot(density(u_1m), col="red", main="Comparación de Densidades", lwd=2)
+lines(density(u_2m), col="blue", lwd=2)
+lines(density(u_3m), col="green", lwd=2)
+lines(density(u_4m), col="purple", lwd=2)
+legend("topright", c("1M","2M","3M","4M"), col=c("red","blue","green","purple"), lwd=2)
+```
+
+# Tiempo Final de generacion del Documento
+```{r}
+```{r tiempo-total-final, echo=TRUE}
+tiempo_total_fin <- Sys.time()
+tiempo_total <- tiempo_total_fin - tiempo_total_inicio
+cat("Tiempo total de generación del documento:", round(as.numeric(tiempo_total, units = "secs"), 2), "segundos\n")
+
 ```
