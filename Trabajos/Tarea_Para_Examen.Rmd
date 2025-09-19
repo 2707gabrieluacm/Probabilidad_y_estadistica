@@ -1,0 +1,3898 @@
+---
+title: "Notas del Curso de Probabilidad y Estadística"
+author: "Ortiz Cruz José Gabriel"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+#  revealjs::revealjs_presentation:
+#    transition: slide
+#    slideNumber: true
+#    center: true
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    #theme: lumen
+    #theme: cosmo
+    #theme: darkly
+    #theme: flatly
+    #theme: journal
+    #theme: paper
+    #theme: readable
+    #theme: sandstone
+    #theme: simplex
+    #theme: spacelab
+    #theme: yeti
+    #theme: cerulean
+    theme: bootstrap
+    #highlight: tango
+    #layout: default
+    css: styles.css
+  word_document: default
+---
+
+
+# Introducción al uso de R
+
+## Sesión 1
+
+###  Operadores Lógicos
+
+```{r}
+17<5
+17>5
+17<=5
+17>=5
+17!=5
+17==5
+```
+
+
+## Operadores Aritméticos
+
+### Sums, Resta, Multiplicación, División, Potencia, Modulo, División Entera
+```{r}
+17+5
+17*5
+17*5
+17^5
+17%/%5
+17%%5
+```
+
+### Logaritmos y exponenciales
+
+```{r}
+log(1)
+log(12)
+log(12,2)
+exp(12)
+exp(1)
+```
+
+### Funciones Trigonométicas
+
+```{r}
+sin(45)
+cos(45)
+tan(45)
+asin(0.96)
+acos(0.97)
+atan(0.45)
+```
+
+### Funciones varias
+
+```{r}
+abs(-34)
+sqrt(8)
+floor(1.56)
+ceiling(1.56)
+max(4,7,2,12)
+min(4,7,2,12)
+sign(-45)
+```
+
+### Ejercicios de práctica
+
+1. calcular la expresion cos(pi/6+pi/2)+e^2
+2 calcular la expresion cos(pi/6+pi/2)+e^2*log(5)+arc cos(1/raiz(2))
+3 introducir las siguientes expresiones: 
+ a) 1/7
+ b) options(digits=3); 1/7
+ c) options(digits=6); 1/7
+ d) round(67.45)
+ e) round(75.324568,2)
+ f) options(digits=7);
+ g) signif(56.345458234234,2)
+ h) signif(56.345458234234)
+ i) exp(-30)
+ j) options(scipen= 999)
+ k) exp(-30)
+ l) options(scipen=0)
+
+##  Sesión 2
+
+###  Definición de constantes
+
+```{r}
+e = exp(1); 
+x = 0.0034
+e <- exp(1)
+x <- 0.034;
+x0 = e^(2*x)
+```
+
+### Concatenar y pegar expresiones
+
+```{r}
+txt = "El valor de x0 es _"
+cat(txt, x0)
+paste(txt,x0)
+paste0(txt,x0)
+```
+
+### Asignación e impresión
+
+```{r}
+x0 <- 1
+x1 <- x0 - pi*x0 + 1 
+(x1 <- x0 - pi*x0 + 1 ) 
+print(x1)
+```
+
+### Listado de objetos definidos
+
+```{r}
+ls()
+```
+Eliminar todos los objetos
+
+```{r}
+rm(list= ls())
+ls()
+```
+
+### Imprimir pegar avanzado
+
+```{r}
+x0 <- 1
+x1 <- x0 - pi*x0 + 1
+cat("x0 =", x0, "\n","x1 =", x1) 
+```
+
+
+## Sesión 3
+
+### Definición de funciones
+nombre_funcion <- function(param1,param2,param3,...,paramn){
+ instruccion 1
+ instruccion 2
+ return(valor_de_retorno)
+}
+
+
+Ejemplo 1
+
+```{r}
+fun1 <- function(x,a,b,h,k){
+  res <- a+b*cos(hx+k)
+  return(res)
+}
+```
+
+Ejemplo 2
+
+```{r}
+Discriminante <- function(a,b,c){
+  res <- b^2-4*a*c
+  return(res)
+}
+```
+
+### Gráficas
+
+```{r}
+fun2 <- function(x,h,k){
+  res <- 1/h*sin(k*x)
+  return(res)
+}
+```
+
+```{r}
+f2 <- fun2(1:100,2,3)
+plot(f2,type="l", col= "red", lwd=2,
+     main= "Grafico de la funcion f2",
+     xlab= "x",
+     ylab="f(x)=1/h*sin(k*x)",
+     axes= TRUE)
+```
+
+# Gráficas en R
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+kgs <- c(100.5, 91.3, 60.4, 83.2, 49.6, 103.1, 60.3, 109.3, 83.5,
+         63.9, 106, 50, 47, 89.7, 108.5, 78.9, 82.7, 60.7, 98.7, 85.2, 48.7, 106.7, 63.9, 84.1,
+         69.5, 53.3, 108.9, 91.8, 108.6, 54.5, 95.1, 90.6, 115.9, 88.5, 67.7, 115.1, 108.3, 76.8,
+         81.4, 102.6, 63.9, 105.9, 106.7, 76.3, 113.7, 50.3, 105.8, 81.4, 67.9, 91.3, 68.9, 93.9,
+         113.7, 87.7, 92.8, 76.2, 104.7, 109.7, 72.6, 81.6, 112.2, 79.8, 60.7, 95.7, 100.1, 94,
+         60.5, 117.1, 45.5, 112.7, 51.7, 107.8, 86.6, 90.3, 105.9, 64.7, 48, 55.4, 52.9, 58.2,
+         117.1, 59.6, 69.9, 96.9, 97, 66.5, 67.4, 77.2, 73.7, 113)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(kgs)
+```
+
+Ordenamos los datos
+
+```{r}
+kgs_ord <- sort(kgs)
+cte <- 9
+```
+
+Definimos un vector que nos servirá para calcular los deciles:
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+con base en lo anterior ahora podemos extraer los cuartiles
+
+```{r}
+mis_deciles <- kgs_ord[t]; (mis_deciles)
+cuantiles <- quantile(kgs); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+Calculemos la media, el valor máximo y el valor mínimo para los datos
+
+```{r}
+x_media <- mean(kgs)
+mi_min <- min(kgs); 
+mi_max <- max(kgs);
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica simple de los datos
+
+```{r}
+plot(kgs,main="Grafica de peso en kilogramos")
+```
+
+Ahora agreguemos detalles, etiquetas, título, colores, etc a la misma gráfica
+
+```{r}
+plot(
+  kgs,
+  main = "Gráfica de peso en kilogramos",
+  xlab = "Índice del individuo",
+  ylab = "Peso (kg)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                  # ubicación
+  legend = c(mi_min,mi_max),    # etiquetas
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(kgs), min(kgs), col = "purple", pch = 17, cex = 1.5)
+points(which.max(kgs), max(kgs), col = "orange", pch = 17, cex = 1.5)
+```
+
+## Generación de *Histogramas*
+
+Con la misma idea que la gráfica anterior, generemos un histograma de los mismos datos
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(kgs, breaks = nbreaks, col= miscolores, 
+          main = 'Peso en kilos',
+          xlab="Peso",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+Mejoremos el gráfico agregando detalles, leyendas e información en la parte lateral de la gráfica
+
+```{r}
+##---- Mejora del grafico ----
+h2 <- hist(kgs, breaks = nbreaks, col= miscolores, 
+          main = 'Peso en kilos',
+          xlab="Peso",
+          ylab="Frecuencias",
+          ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Histograma con porcentajes 
+
+```{r}
+##---- Grafico con porcentajes ----
+h3 <- hist(kgs, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Peso en kilos',
+           xlab="Peso",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                  # ubicación
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Graficos de pastel ----
+# Tus datos
+nbreaks <- 10
+intervalos <- cut(kgs, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Distribución de pesos (10 intervalos)",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+## Gráfica de Ojiva
+
+```{r}
+#---- Grafica de Ojiva ----
+##---- Grafica sencilla ----
+nbreaks <- 10
+h <- hist(kgs, breaks = nbreaks, plot = FALSE)
+freq_acum <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+plot(x_vals, freq_acum, type = "o",
+     main = "Ojiva de pesos",
+     xlab = "Peso (kg)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100))
+abline(h = 100, col = "red", lty = 2)
+```
+
+Mejoramos la gráfica anterior.
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(kgs, breaks = nbreaks, plot = FALSE)
+hist(kgs,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Peso (kg)",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           # eje derecho
+#---- Fin ----
+```
+
+# Ejercicio de clase
+
+
+Generemos los datos correspondientes a la estatura registrada de 100 personas
+
+```{r}
+estatura <- c(1.57, 1.97, 1.85, 1.78, 1.62, 1.67, 1.92, 1.96, 1.76,
+1.94, 1.85, 1.71, 1.65, 1.98, 1.56, 1.84, 1.91, 1.61, 1.8, 1.58, 1.7, 1.62,
+1.76, 1.84, 1.95, 1.67, 1.62, 1.65, 1.61, 1.56, 1.63, 1.96, 1.53, 1.75, 1.9,
+1.92, 1.79, 1.62, 1.79, 1.57, 1.74, 1.55, 1.65, 1.84, 1.6, 1.7, 1.9, 1.61,
+1.54, 1.89, 1.84, 1.76, 1.61, 1.59, 1.81, 1.52, 1.61, 1.91, 1.65, 1.51,
+1.98, 1.54, 1.87, 1.92, 1.51, 1.93, 1.78, 1.67, 1.66, 1.82, 1.56, 1.66,
+1.79, 1.88, 1.78, 1.84, 1.69, 1.95, 1.99, 1.88, 1.51, 1.76, 1.9, 1.6, 1.69,
+1.77, 1.87, 1.67, 1.66, 1.71, 1.64, 1.81, 1.52, 1.8, 1.71, 1.52, 2, 1.81,
+1.92, 1.7)
+(estatura)
+```
+
+Calculemos la media, el valor máximo y el valor mínimo para los datos, así como la varianza y la desviación estándar
+
+```{r}
+x_media <- mean(estatura); (x_media)
+mi_min <- min(estatura); (mi_min)
+mi_max <- max(estatura); (mi_max)
+varianza <- var(estatura); (varianza) 
+DesvEst <- sd(estatura); (DesvEst)
+```
+
+
+```{r}
+plot(estatura,main="Grafica de estatura en metros")
+```
+
+Ahora agreguemos detalles, etiquetas, título, colores, etc a la misma gráfica
+
+```{r}
+plot(
+  estatura,
+  main = "Gráfica de estaturas en metros",
+  xlab = "Personas",
+  ylab = "Estatura (mts)",
+  col = "darkblue",       
+  pch = 20,           
+  cex = 0.75,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "yellow")
+legend(
+  "bottomleft",                  # ubicación
+  legend = c(mi_min,mi_max),    # etiquetas
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(kgs), min(kgs), col = "purple", pch = 17, cex = 1.5)
+points(which.max(kgs), max(kgs), col = "orange", pch = 17, cex = 1.5)
+```
+
+Con la misma idea que la gráfica anterior, generemos un histograma de los mismos datos
+
+```{r}
+nbreaks=8;
+miscolores <- rainbow(25,0.85);
+h <- hist(estatura, breaks = nbreaks, col= miscolores, 
+          main = 'Estatura en metros',
+          xlab="Estatura",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+Mejoremos el gráfico agregando detalles, leyendas e información en la parte lateral de la gráfica
+
+```{r}
+##---- Mejora del grafico ----
+miscolores <- rainbow(12,0.25);
+h2 <- hist(estatura, breaks = nbreaks, col= miscolores, 
+          main = 'Estatura en metros',
+          xlab="Estatura",
+          ylab="Frecuencias",
+          ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+
+```{r}
+#---- Graficos de pastel ----
+# Tus datos
+nbreaks <- 10
+intervalos <- cut(estatura, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Distribución estaruas (10 intervalos)",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+# Ejercicio de *Nacionalidad*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+Nacionalidad <- c("Boliviana", "Peruana", "Venezolana", "Cubana", "Mexicana",
+ "Colombiana", "Colombiana", "Brasileña", "Colombiana", "Venezolana", "Chilena",
+ "Argentina", "Mexicana", "Mexicana", "Argentina", "Mexicana", "Argentina",
+ "Brasileña", "Mexicana", "Uruguaya", "Argentina", "Argentina", "Colombiana",
+ "Cubana", "Boliviana", "Peruana", "Boliviana", "Boliviana", "Peruana", "Uruguaya",
+ "Chilena", "Uruguaya", "Venezolana", "Uruguaya", "Argentina", "Venezolana",
+ "Uruguaya", "Cubana", "Venezolana", "Cubana", "Chilena", "Argentina", "Peruana",
+ "Boliviana", "Cubana", "Venezolana", "Colombiana", "Mexicana", "Uruguaya",
+ "Argentina")
+
+# Convertir a factor con orden específico
+Nacionalidad_factor <- factor(Nacionalidad, levels = c("Argentina", "Boliviana", "Brasileña", "Chilena", "Colombiana", "Cubana", "Mexicana", "Peruana", "Uruguaya", "Venezolana"))
+```
+
+## Procesamiento de datos
+
+```{r}
+# Para nominales NO calculamos media ni mediana, solo frecuencias
+table(Nacionalidad_factor)        # Tabla de frecuencias por categorías
+prop.table(table(Nacionalidad_factor)) * 100  # Porcentajes
+
+# Solo trabajamos con frecuencias y proporciones
+tabla_Nacionalidad <- table(Nacionalidad_factor)
+moda <- names(tabla_Nacionalidad[which.max(tabla_Nacionalidad)])
+print(paste("La moda es:", moda))
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica, como plot no funciona bien con factores directamente, creamos un gráfico de índices
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Márgenes: c(inferior, izquierda, superior, derecha)
+# mgp: (distancia_titulo_eje, distancia_etiquetas_eje, distancia_linea_eje)
+par(mar = c(4, 8, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+colores <- rainbow(length(levels(Nacionalidad_factor)))
+plot(1:length(Nacionalidad), as.numeric(Nacionalidad_factor),
+     main="Nacionalidad por persona",
+     xlab = "Índice de la persona",
+     ylab = "Nacionalidad",
+     col = colores[as.numeric(Nacionalidad_factor)],
+     pch = 19, cex = 0.5,
+     cex.main = 1.5, cex.lab = 1.2, col.main = "darkred",
+     yaxt = "n")
+
+axis(2, at = 1:length(levels(Nacionalidad_factor)),
+     labels = levels(Nacionalidad_factor), las = 1, cex.axis = 0.8)
+
+# Leyenda (ajustada para puntos y sin sobreponer)
+legend("topright", 
+       inset = c(0, 0), xpd = TRUE, # Ajustar 'inset' para posicionar en el margen derecho
+       legend = levels(Nacionalidad_factor),
+       pch = 19, col = colores, # Usar 'pch' y 'col' para puntos
+       pt.cex = 1.5, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Generación de *Gráficos de barras* (más apropiado que histogramas para nominales).
+
+```{r}
+miscolores <- rainbow(length(levels(Nacionalidad_factor)), 0.85)
+old_par <- par(no.readonly = TRUE)
+
+par(mar = c(10, 4, 4, 10) + 0.1, mgp = c(5.5, 1, 0))
+
+bp <- barplot(tabla_Nacionalidad,
+              col = miscolores,
+              main="Frecuencia de Nacionalidad por persona",
+              xlab = "Tipo de Nacionalidad",
+              ylab = "Frecuencias",
+              las = 2, ylim = c(0, max(tabla_Nacionalidad) * 1.2),
+              cex.names = 0.8)
+
+text(x = bp, y = tabla_Nacionalidad, labels = tabla_Nacionalidad, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste(names(tabla_Nacionalidad), ":", tabla_Nacionalidad),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+porcentajes <- round(prop.table(tabla_Nacionalidad) * 100, 0)
+miscolores <- rainbow(length(levels(Nacionalidad_factor)), s = 0.85, v = 0.9)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = miscolores,
+              main = '% de Nacionalidad por persona',
+              xlab = "Tipo de Nacionalidad",
+              ylab = "Porcentaje",
+              las = 2, ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.8, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste0(names(tabla_Nacionalidad), ": ", porcentajes, "%"),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Gráficos de pastel ----
+# Recalcular porcentajes con un decimal para el pastel, si se prefiere
+porcentajes_pastel <- round(prop.table(tabla_Nacionalidad) * 100, 1) 
+colores_pastel <- rainbow(length(tabla_Nacionalidad)) # Reusar 'tabla_Nacionalidad' para consistencia
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_Nacionalidad, # Usar 'tabla_Nacionalidad' directamente para el pie
+    main = "Distribución de Nacionalidades por persona",
+    col = colores_pastel,
+    labels = paste0(names(tabla_Nacionalidad), "\n", porcentajes_pastel, "%"),
+    radius = 0.8, # Ajustar radio para separar etiquetas del centro
+    cex = 0.8 # Tamaño del texto de las etiquetas
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+# Para nominales, la ojiva no tiene interpretación matemática válida
+# porque las categorías no tienen un orden natural
+# Pero mantenemos la estructura por consistencia con el formato original
+
+# Creamos una secuencia numérica solo para traficar
+posiciones <- 1:length(tabla_Nacionalidad)
+freq_acum <- cumsum(tabla_Nacionalidad)
+freq_acum_pct <- freq_acum / sum(tabla_Nacionalidad) * 100
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0)) # Margen inferior para xlab y etiquetas X
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Nacionalidad (solo referencial)",
+     xlab = "Categorías nominales (orden arbitrario)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_Nacionalidad), 
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+
+text(x = 3, y = 50, "NOTA: Para variables nominales\nla ojiva no tiene interpretación\nmatemática válida ya que las\ncategorías no tienen orden natural",
+     cex = 0.7, col = "red", bg = "white")
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Color de ojos*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+color_de_ojos <- c("Gris", "Azul", "Ambar", "Negro", "Avellana", "Café", "Avellana", "Azul",
+ "Verde", "Ambar", "Avellana", "Café", "Café", "Azul", "Verde", "Azul", "Avellana", "Verde",
+ "Verde", "Verde", "Gris", "Negro", "Avellana", "Negro", "Gris", "Negro", "Avellana", "Azul",
+ "Ambar", "Verde")
+
+# Convertir a factor con orden específico
+color_de_ojos_factor <- factor(color_de_ojos, levels = c("Ambar", "Avellana", "Azul", "Café", "Gris", "Negro", "Verde"))
+```
+
+## Procesamiento de datos
+
+```{r}
+# Para nominales NO calculamos media ni mediana, solo frecuencias
+table(color_de_ojos_factor)        # Tabla de frecuencias por categorías
+prop.table(table(color_de_ojos_factor)) * 100  # Porcentajes
+
+# Solo trabajamos con frecuencias y proporciones
+tabla_color_de_ojos <- table(color_de_ojos_factor)
+moda <- names(tabla_color_de_ojos[which.max(tabla_color_de_ojos)])
+print(paste("La moda es:", moda))
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica, como plot no funciona bien con factores directamente, creamos un gráfico de índices
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Márgenes: c(inferior, izquierda, superior, derecha)
+# mgp: (distancia_titulo_eje, distancia_etiquetas_eje, distancia_linea_eje)
+par(mar = c(4, 8, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+colores <- rainbow(length(levels(color_de_ojos_factor)))
+plot(1:length(color_de_ojos), as.numeric(color_de_ojos_factor),
+     main="Color de ojos",
+     xlab = "Índice de la persona",
+     ylab = "Color",
+     col = colores[as.numeric(color_de_ojos_factor)],
+     pch = 19, cex = 0.5,
+     cex.main = 1.5, cex.lab = 1.2, col.main = "darkred",
+     yaxt = "n")
+
+axis(2, at = 1:length(levels(color_de_ojos_factor)),
+     labels = levels(color_de_ojos_factor), las = 1, cex.axis = 0.8)
+
+# Leyenda (ajustada para puntos y sin sobreponer)
+legend("topright", 
+       inset = c(0, 0), xpd = TRUE, # Ajustar 'inset' para posicionar en el margen derecho
+       legend = levels(color_de_ojos_factor),
+       pch = 19, col = colores, # Usar 'pch' y 'col' para puntos
+       pt.cex = 1.5, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Generación de *Gráficos de barras* (más apropiado que histogramas para nominales).
+
+```{r}
+miscolores <- rainbow(length(levels(color_de_ojos_factor)), 0.85)
+old_par <- par(no.readonly = TRUE)
+
+par(mar = c(10, 4, 4, 10) + 0.1, mgp = c(5.5, 1, 0))
+
+bp <- barplot(tabla_color_de_ojos,
+              col = miscolores,
+              main="Frecuencia de Color de ojos por persona",
+              xlab = "Tipo de Color",
+              ylab = "Frecuencias",
+              las = 2, ylim = c(0, max(tabla_color_de_ojos) * 1.2),
+              cex.names = 0.8)
+
+text(x = bp, y = tabla_color_de_ojos, labels = tabla_color_de_ojos, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste(names(tabla_color_de_ojos), ":", tabla_color_de_ojos),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+porcentajes <- round(prop.table(tabla_color_de_ojos) * 100, 0)
+miscolores <- rainbow(length(levels(color_de_ojos_factor)), s = 0.85, v = 0.9)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = miscolores,
+              main = '% de Color de ojos por persona',
+              xlab = "Tipo de Color",
+              ylab = "Porcentaje",
+              las = 2, ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.8, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste0(names(tabla_color_de_ojos), ": ", porcentajes, "%"),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Gráficos de pastel ----
+# Recalcular porcentajes con un decimal para el pastel, si se prefiere
+porcentajes_pastel <- round(prop.table(tabla_color_de_ojos) * 100, 1) 
+colores_pastel <- rainbow(length(tabla_color_de_ojos)) # Reusar 'tabla_color_de_ojos' para consistencia
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_color_de_ojos, # Usar 'tabla_color_de_ojos' directamente para el pie
+    main = "Distribución de Color de ojos por persona",
+    col = colores_pastel,
+    labels = paste0(names(tabla_color_de_ojos), "\n", porcentajes_pastel, "%"),
+    radius = 0.8, # Ajustar radio para separar etiquetas del centro
+    cex = 0.8 # Tamaño del texto de las etiquetas
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+# Para nominales, la ojiva no tiene interpretación matemática válida
+# porque las categorías no tienen un orden natural
+# Pero mantenemos la estructura por consistencia con el formato original
+
+# Creamos una secuencia numérica solo para traficar
+posiciones <- 1:length(tabla_color_de_ojos)
+freq_acum <- cumsum(tabla_color_de_ojos)
+freq_acum_pct <- freq_acum / sum(tabla_color_de_ojos) * 100
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0)) # Margen inferior para xlab y etiquetas X
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Color de Ojos (solo referencial)",
+     xlab = "Categorías nominales (orden arbitrario)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_color_de_ojos), 
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+
+text(x = 3, y = 50, "NOTA: Para variables nominales\nla ojiva no tiene interpretación\nmatemática válida ya que las\ncategorías no tienen orden natural",
+     cex = 0.7, col = "red", bg = "white")
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Marca de celular*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+marca_de_celular <- c("Apple", "Samsung", "LG", "Huawei", "OnePlus", "Sony", "Apple",
+ "Samsung", "Huawei", "Huawei", "Nokia", "OnePlus", "Motorola", "Xiaomi",
+ "Samsung", "Apple", "Apple", "Motorola", "Samsung", "Samsung", "Huawei",
+ "Motorola", "Nokia", "OnePlus", "Huawei", "Huawei", "Apple", "LG", "Apple", "Xiaomi",
+ "LG", "OnePlus", "OnePlus", "LG", "Sony", "Samsung", "Apple", "Xiaomi", "Oppo",
+ "Motorola", "LG", "Samsung", "Motorola", "Samsung", "Nokia", "OnePlus", "OnePlus",
+ "Oppo", "Sony", "Nokia", "Huawei", "LG", "Sony", "Xiaomi", "LG", "Huawei", "LG", "Nokia",
+ "Xiaomi", "Sony", "OnePlus", "LG", "Xiaomi", "OnePlus", "Oppo", "Nokia", "Huawei",
+ "Xiaomi", "Oppo", "Oppo")
+
+# Convertir a factor con orden específico
+marca_de_celular_factor <- factor(marca_de_celular, levels = c("Apple", "Huawei", "LG", "Motorola", "Nokia", "OnePlus", "Oppo", "Samsung", "Sony", "Xiaomi"))
+```
+
+## Procesamiento de datos
+
+```{r}
+# Para nominales NO calculamos media ni mediana, solo frecuencias
+table(marca_de_celular_factor)        # Tabla de frecuencias por categorías
+prop.table(table(marca_de_celular_factor)) * 100  # Porcentajes
+
+# Solo trabajamos con frecuencias y proporciones
+tabla_marca_de_celular <- table(marca_de_celular_factor)
+moda <- names(tabla_marca_de_celular[which.max(tabla_marca_de_celular)])
+print(paste("La moda es:", moda))
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica, como plot no funciona bien con factores directamente, creamos un gráfico de índices
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Márgenes: c(inferior, izquierda, superior, derecha)
+# mgp: (distancia_titulo_eje, distancia_etiquetas_eje, distancia_linea_eje)
+par(mar = c(4, 8, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+colores <- rainbow(length(levels(marca_de_celular_factor)))
+plot(1:length(marca_de_celular), as.numeric(marca_de_celular_factor),
+     main="Marca de celulares por persona",
+     xlab = "Índice de la persona",
+     ylab = "Marca",
+     col = colores[as.numeric(marca_de_celular_factor)],
+     pch = 19, cex = 0.5,
+     cex.main = 1.5, cex.lab = 1.2, col.main = "darkred",
+     yaxt = "n")
+
+axis(2, at = 1:length(levels(marca_de_celular_factor)),
+     labels = levels(marca_de_celular_factor), las = 1, cex.axis = 0.8)
+
+# Leyenda (ajustada para puntos y sin sobreponer)
+legend("topright", 
+       inset = c(0, 0), xpd = TRUE, # Ajustar 'inset' para posicionar en el margen derecho
+       legend = levels(marca_de_celular_factor),
+       pch = 19, col = colores, # Usar 'pch' y 'col' para puntos
+       pt.cex = 1.5, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Generación de *Gráficos de barras* (más apropiado que histogramas para nominales).
+
+```{r}
+miscolores <- rainbow(length(levels(marca_de_celular_factor)), 0.85)
+old_par <- par(no.readonly = TRUE)
+
+par(mar = c(10, 4, 4, 10) + 0.1, mgp = c(5.5, 1, 0))
+
+bp <- barplot(tabla_marca_de_celular,
+              col = miscolores,
+              main="Frecuencia de Marca por persona",
+              xlab = "Marca",
+              ylab = "Frecuencias",
+              las = 2, ylim = c(0, max(tabla_marca_de_celular) * 1.2),
+              cex.names = 0.8)
+
+text(x = bp, y = tabla_marca_de_celular, labels = tabla_marca_de_celular, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste(names(tabla_marca_de_celular), ":", tabla_marca_de_celular),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+porcentajes <- round(prop.table(tabla_marca_de_celular) * 100, 0)
+miscolores <- rainbow(length(levels(marca_de_celular_factor)), s = 0.85, v = 0.9)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = miscolores,
+              main = '% de Marca por persona',
+              xlab = "Tipo de Marca",
+              ylab = "Porcentaje",
+              las = 2, ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.8, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste0(names(tabla_marca_de_celular), ": ", porcentajes, "%"),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Gráficos de pastel ----
+# Recalcular porcentajes con un decimal para el pastel, si se prefiere
+porcentajes_pastel <- round(prop.table(tabla_marca_de_celular) * 100, 1) 
+colores_pastel <- rainbow(length(tabla_marca_de_celular)) # Reusar 'tabla_marca_de_celular' para consistencia
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_marca_de_celular, # Usar 'tabla_marca_de_celular' directamente para el pie
+    main = "Distribución de Marca por persona",
+    col = colores_pastel,
+    labels = paste0(names(tabla_marca_de_celular), "\n", porcentajes_pastel, "%"),
+    radius = 0.8, # Ajustar radio para separar etiquetas del centro
+    cex = 0.8 # Tamaño del texto de las etiquetas
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+# Para nominales, la ojiva no tiene interpretación matemática válida
+# porque las categorías no tienen un orden natural
+# Pero mantenemos la estructura por consistencia con el formato original
+
+# Creamos una secuencia numérica solo para traficar
+posiciones <- 1:length(tabla_marca_de_celular)
+freq_acum <- cumsum(tabla_marca_de_celular)
+freq_acum_pct <- freq_acum / sum(tabla_marca_de_celular) * 100
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0)) # Margen inferior para xlab y etiquetas X
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Marca de Celular (solo referencial)",
+     xlab = "Categorías nominales (orden arbitrario)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_marca_de_celular), 
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+
+text(x = 3, y = 50, "NOTA: Para variables nominales\nla ojiva no tiene interpretación\nmatemática válida ya que las\ncategorías no tienen orden natural",
+     cex = 0.7, col = "red", bg = "white")
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Estado civil*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+estado_civil <- c("Viudo", "Viudo", "Union libre", "Soltero", "Viudo", "Union libre",
+ "Divorciado", "Casado", "Union libre", "Viudo", "Viudo", "Soltero", "Divorciado",
+ "Divorciado", "Divorciado", "Union libre", "Casado", "Union libre", "Casado",
+ "Soltero", "Viudo", "Casado", "Casado", "Divorciado", "Union libre", "Soltero",
+ "Divorciado", "Divorciado", "Casado", "Union libre", "Soltero", "Viudo", "Viudo",
+ "Soltero", "Divorciado", "Viudo", "Viudo", "Soltero", "Union libre", "Divorciado")
+ 
+# Convertir a factor con orden específico
+estado_civil_factor <- factor(estado_civil, levels = c("Casado", "Divorciado", "Soltero", "Union libre", "Viudo"))
+```
+
+## Procesamiento de datos
+
+```{r}
+# Para nominales NO calculamos media ni mediana, solo frecuencias
+table(estado_civil_factor)        # Tabla de frecuencias por categorías
+prop.table(table(estado_civil_factor)) * 100  # Porcentajes
+
+# Solo trabajamos con frecuencias y proporciones
+tabla_estado_civil <- table(estado_civil_factor)
+moda <- names(tabla_estado_civil[which.max(tabla_estado_civil)])
+print(paste("La moda es:", moda))
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica, como plot no funciona bien con factores directamente, creamos un gráfico de índices
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Márgenes: c(inferior, izquierda, superior, derecha)
+# mgp: (distancia_titulo_eje, distancia_etiquetas_eje, distancia_linea_eje)
+par(mar = c(4, 8, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+colores <- rainbow(length(levels(estado_civil_factor)))
+plot(1:length(estado_civil), as.numeric(estado_civil_factor),
+     main="Estado Civil por persona",
+     xlab = "Índice de la persona",
+     ylab = "Estado Civil",
+     col = colores[as.numeric(estado_civil_factor)],
+     pch = 19, cex = 0.5,
+     cex.main = 1.5, cex.lab = 1.2, col.main = "darkred",
+     yaxt = "n")
+
+axis(2, at = 1:length(levels(estado_civil_factor)),
+     labels = levels(estado_civil_factor), las = 1, cex.axis = 0.8)
+
+# Leyenda (ajustada para puntos y sin sobreponer)
+legend("topright", 
+       inset = c(0, 0), xpd = TRUE, # Ajustar 'inset' para posicionar en el margen derecho
+       legend = levels(estado_civil_factor),
+       pch = 19, col = colores, # Usar 'pch' y 'col' para puntos
+       pt.cex = 1.5, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Generación de *Gráficos de barras* (más apropiado que histogramas para nominales).
+
+```{r}
+miscolores <- rainbow(length(levels(estado_civil_factor)), 0.85)
+old_par <- par(no.readonly = TRUE)
+
+par(mar = c(10, 4, 4, 10) + 0.1, mgp = c(5.5, 1, 0))
+
+bp <- barplot(tabla_estado_civil,
+              col = miscolores,
+              main="Frecuencia de Estado Civil por persona",
+              xlab = "Tipo de Estado Civil",
+              ylab = "Frecuencias",
+              las = 2, ylim = c(0, max(tabla_estado_civil) * 1.2),
+              cex.names = 0.8)
+
+text(x = bp, y = tabla_estado_civil, labels = tabla_estado_civil, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste(names(tabla_estado_civil), ":", tabla_estado_civil),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+porcentajes <- round(prop.table(tabla_estado_civil) * 100, 0)
+miscolores <- rainbow(length(levels(estado_civil_factor)), s = 0.85, v = 0.9)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = miscolores,
+              main = '% de Estado Civil por persona',
+              xlab = "Tipo de Estado Civil",
+              ylab = "Porcentaje",
+              las = 2, ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.8, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+# Leyenda (ajustada para barplot y sin sobreponer)
+legend("topright", inset = c(-0.25, 0), xpd = TRUE, # Ajustar 'inset'
+       legend = paste0(names(tabla_estado_civil), ": ", porcentajes, "%"),
+       fill = miscolores, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Gráficos de pastel ----
+# Recalcular porcentajes con un decimal para el pastel, si se prefiere
+porcentajes_pastel <- round(prop.table(tabla_estado_civil) * 100, 1) 
+colores_pastel <- rainbow(length(tabla_estado_civil)) # Reusar 'tabla_estado_civil' para consistencia
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_estado_civil, # Usar 'tabla_estado_civil' directamente para el pie
+    main = "Distribución de Estado Civil por persona",
+    col = colores_pastel,
+    labels = paste0(names(tabla_estado_civil), "\n", porcentajes_pastel, "%"),
+    radius = 0.8, # Ajustar radio para separar etiquetas del centro
+    cex = 0.8 # Tamaño del texto de las etiquetas
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+# Para nominales, la ojiva no tiene interpretación matemática válida
+# porque las categorías no tienen un orden natural
+# Pero mantenemos la estructura por consistencia con el formato original
+
+# Creamos una secuencia numérica solo para traficar
+posiciones <- 1:length(tabla_estado_civil)
+freq_acum <- cumsum(tabla_estado_civil)
+freq_acum_pct <- freq_acum / sum(tabla_estado_civil) * 100
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0)) # Margen inferior para xlab y etiquetas X
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Estado Civil (solo referencial)",
+     xlab = "Categorías nominales (orden arbitrario)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_estado_civil), 
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+
+text(x = 3, y = 50, "NOTA: Para variables nominales\nla ojiva no tiene interpretación\nmatemática válida ya que las\ncategorías no tienen orden natural",
+     cex = 0.7, col = "red", bg = "white")
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Nivel educativo*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los niveles educativos de 40 personas
+
+```{r}
+# Datos de niveles educativos de 40 personas
+nivel_educativo <- c("posdoctorado", "preparatoria", "preparatoria", "doctorado",
+                     "primaria", "doctorado", "preparatoria", "secundaria", "preparatoria", "preparatoria",
+                     "primaria", "doctorado", "secundaria", "secundaria", "secundaria", "licenciatura",
+                     "doctorado", "primaria", "maestria", "posdoctorado", "maestria", "preparatoria",
+                     "posdoctorado", "doctorado", "preparatoria", "doctorado", "maestria", "primaria",
+                     "licenciatura", "secundaria", "maestria", "posdoctorado", "doctorado", "licenciatura",
+                     "doctorado", "posdoctorado", "maestria", "primaria", "secundaria", "preparatoria")
+
+# Define los niveles en el ORDEN LÓGICO Y DESEADO para la variable ordinal
+niveles_educacion <- c("primaria", "secundaria", "preparatoria", "licenciatura", "maestria", "doctorado", "posdoctorado")
+
+nivel_educativo_factor <- factor(nivel_educativo,
+                                 levels = niveles_educacion, ordered = TRUE)
+```
+
+## Procesamiento de datos
+
+```{r}
+# Tabla de frecuencias
+tabla_nivel_educativo <- table(nivel_educativo_factor)
+
+# Porcentajes (0 decimales para gráficos de barras, 1 para pastel si se prefiere)
+porcentajes <- round(prop.table(tabla_nivel_educativo) * 100, 0)
+
+# Porcentajes acumulados para la mediana
+porcentajes_acumulados <- cumsum(prop.table(tabla_nivel_educativo) * 100)
+
+# Moda: categoría con la mayor frecuencia
+moda <- names(tabla_nivel_educativo[which.max(tabla_nivel_educativo)])
+
+# Mediana: primera categoría donde el porcentaje acumulado >= 50%
+indice_mediana <- which(porcentajes_acumulados >= 50)[1]
+mediana_nivel_educativo <- names(tabla_nivel_educativo)[indice_mediana]
+
+# Imprimir resultados
+print(tabla_nivel_educativo)
+print(porcentajes)
+print(paste("La moda del nivel educativo es:", moda))
+print(paste("La mediana del nivel educativo es:", mediana_nivel_educativo))
+
+# Paleta de colores para todas las gráficas (definida una vez)
+colores_educacion <- rainbow(length(levels(nivel_educativo_factor)), s = 0.85, v = 0.9)
+names(colores_educacion) <- levels(nivel_educativo_factor)
+```
+
+## Gráfico de Barras (Frecuencias Absolutas)
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Ajuste de márgenes para etiquetas X rotadas y leyenda
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(tabla_nivel_educativo,
+              col = colores_educacion,
+              main="Frecuencia de Nivel Educativo",
+              xlab = "Nivel Educativo",
+              ylab = "Frecuencias",
+              las = 2,
+              ylim = c(0, max(tabla_nivel_educativo) * 1.2),
+              cex.names = 0.9)
+
+text(x = bp, y = tabla_nivel_educativo, labels = tabla_nivel_educativo, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste(names(tabla_nivel_educativo), ":", tabla_nivel_educativo),
+       fill = colores_educacion, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = colores_educacion,
+              main = '% de Nivel de Educativo',
+              xlab = "Nivel Educativo",
+              ylab = "Porcentaje",
+              las = 2,
+              ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.9, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste0(names(tabla_nivel_educativo), ": ", porcentajes, "%"),
+       fill = colores_educacion, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_nivel_educativo) * 100, 1)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_nivel_educativo,
+    main = "Distribución del Nivel Educativo",
+    col = colores_educacion,
+    labels = paste0(names(tabla_nivel_educativo), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+posiciones <- 1:length(tabla_nivel_educativo)
+freq_acum_pct <- cumsum(prop.table(tabla_nivel_educativo) * 100) # Usar la misma que para la mediana
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Nivel Educativo",
+     xlab = "Nivel Educativo",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_nivel_educativo),
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2) # Línea para la mediana
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+x_mediana_plot <- posiciones[indice_mediana] 
+points(x_mediana_plot, 50, col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, 50, paste0("Mediana: ", mediana_nivel_educativo),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Nivel de satisfacción*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los niveles de satisfacción de 51 personas
+
+```{r}
+# Datos de niveles educativos de 40 personas
+nivel_de_satisfacción <- c("satisfecho", "muy satisfecho", "muy insatisfecho", 
+"neutral", "muy satisfecho", "muy insatisfecho", "muy satisfecho", "insatisfecho", 
+"muy insatisfecho", "insatisfecho", "muy satisfecho", "insatisfecho", "muy satisfecho", 
+"muy satisfecho", "mas o menos insatisfecho", "insatisfecho", "satisfecho", "muy satisfecho", 
+"neutral", "mas o menos insatisfecho", "muy insatisfecho", "mas o menos satisfecho", 
+"insatisfecho", "neutral", "mas o menos satisfecho", "satisfecho", "mas o menos satisfecho", 
+"satisfecho", "neutral", "satisfecho", "muy insatisfecho", "muy insatisfecho", "neutral", 
+"satisfecho", "insatisfecho", "mas o menos satisfecho", "mas o menos insatisfecho", 
+"muy insatisfecho", "neutral", "neutral", "satisfecho", "neutral", "insatisfecho", 
+"mas o menos insatisfecho", "mas o menos insatisfecho", "insatisfecho", 
+"mas o menos satisfecho", "satisfecho", "neutral", "insatisfecho", "insatisfecho"
+)
+
+# Define los niveles en el ORDEN LÓGICO Y DESEADO para la variable ordinal
+niveles_satisfacción <- c("insatisfecho", "mas o menos insatisfecho", "mas o menos satisfecho", "muy insatisfecho", "muy satisfecho", "neutral", "satisfecho")
+
+nivel_de_satisfacción_factor <- factor(nivel_de_satisfacción,
+                                 levels = niveles_satisfacción, ordered = TRUE)
+```
+
+## Procesamiento de datos
+
+```{r}
+# Tabla de frecuencias
+tabla_nivel_de_satisfacción <- table(nivel_de_satisfacción_factor)
+
+# Porcentajes (0 decimales para gráficos de barras, 1 para pastel si se prefiere)
+porcentajes <- round(prop.table(tabla_nivel_de_satisfacción) * 100, 0)
+
+# Porcentajes acumulados para la mediana
+porcentajes_acumulados <- cumsum(prop.table(tabla_nivel_de_satisfacción) * 100)
+
+# Moda: categoría con la mayor frecuencia
+moda <- names(tabla_nivel_de_satisfacción[which.max(tabla_nivel_de_satisfacción)])
+
+# Mediana: primera categoría donde el porcentaje acumulado >= 50%
+indice_mediana <- which(porcentajes_acumulados >= 50)[1]
+mediana_nivel_de_satisfacción <- names(tabla_nivel_de_satisfacción)[indice_mediana]
+
+# Imprimir resultados
+print(tabla_nivel_de_satisfacción)
+print(porcentajes)
+print(paste("La moda del nivel educativo es:", moda))
+print(paste("La mediana del nivel educativo es:", mediana_nivel_de_satisfacción))
+
+# Paleta de colores para todas las gráficas (definida una vez)
+colores_satisfacción <- rainbow(length(levels(nivel_de_satisfacción_factor)), s = 0.85, v = 0.9)
+names(colores_satisfacción) <- levels(nivel_de_satisfacción_factor)
+```
+
+## Gráfico de Barras (Frecuencias Absolutas)
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Ajuste de márgenes para etiquetas X rotadas y leyenda
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(tabla_nivel_de_satisfacción,
+              col = colores_satisfacción,
+              main="Frecuencia de Nivel de satisfacción",
+              xlab = "Nivel Satisfacción",
+              ylab = "Frecuencias",
+              las = 2,
+              ylim = c(0, max(tabla_nivel_de_satisfacción) * 1.2),
+              cex.names = 0.9)
+
+text(x = bp, y = tabla_nivel_de_satisfacción, labels = tabla_nivel_de_satisfacción, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste(names(tabla_nivel_de_satisfacción), ":", tabla_nivel_de_satisfacción),
+       fill = colores_satisfacción, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = colores_satisfacción,
+              main = '% de Nivel de Satisfacción ',
+              xlab = "Nivel Satisfacción",
+              ylab = "Porcentaje",
+              las = 2,
+              ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.9, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste0(names(tabla_nivel_de_satisfacción), ": ", porcentajes, "%"),
+       fill = colores_satisfacción, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_nivel_de_satisfacción) * 100, 1)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_nivel_de_satisfacción,
+    main = "Distribución del Nivel de Satisfacción",
+    col = colores_satisfacción,
+    labels = paste0(names(tabla_nivel_de_satisfacción), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+posiciones <- 1:length(tabla_nivel_de_satisfacción)
+freq_acum_pct <- cumsum(prop.table(tabla_nivel_de_satisfacción) * 100) # Usar la misma que para la mediana
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Nivel de Satisfacción",
+     xlab = "Nivel de Satisfacción",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_nivel_de_satisfacción),
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2) # Línea para la mediana
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+x_mediana_plot <- posiciones[indice_mediana] 
+points(x_mediana_plot, 50, col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, 50, paste0("Mediana: ", mediana_nivel_de_satisfacción),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Reseñas de hoteles*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los Reseñas de Hoteles de 35 Hoteles
+
+```{r}
+# Datos de Reseña de hoteles de 35 Hoteles 
+reseñas_de_hoteles <- c("4 estrellas", "5 estrellas", "1.5 estrellas", "4.5 estrellas", "5 estrellas", 
+"4.5 estrellas", "2.5 estrellas", "4 estrellas", "4.5 estrellas", "1.5 estrellas", 
+"3.5 estrellas", "1 estrella", "3.5 estrellas", "3 estrellas", "5 estrellas", 
+"1.5 estrellas", "2 estrellas", "2 estrellas", "1.5 estrellas", "4.5 estrellas", 
+"4.5 estrellas", "1.5 estrellas", "3.5 estrellas", "4 estrellas", "1 estrella", 
+"4 estrellas", "4.5 estrellas", "3.5 estrellas", "1 estrella", "4 estrellas", 
+"4 estrellas", "2 estrellas", "1 estrella", "4.5 estrellas", "1 estrella"
+)
+
+# Define los niveles en el ORDEN LÓGICO Y DESEADO para la variable ordinal
+niveles_reseñas <- c("1 estrella", "1.5 estrellas", "2 estrellas", "2.5 estrellas", "3 estrellas", "3.5 estrellas", "4 estrellas", "4.5 estrellas", "5 estrellas")
+
+reseñas_de_hoteles_factor <- factor(reseñas_de_hoteles,
+                                 levels = niveles_reseñas, ordered = TRUE)
+
+```
+
+## Procesamiento de datos
+
+```{r}
+# Tabla de frecuencias
+tabla_reseñas_de_hoteles <- table(reseñas_de_hoteles_factor)
+
+# Porcentajes (0 decimales para gráficos de barras, 1 para pastel si se prefiere)
+porcentajes <- round(prop.table(tabla_reseñas_de_hoteles) * 100, 0)
+
+# Porcentajes acumulados para la mediana
+porcentajes_acumulados <- cumsum(prop.table(tabla_reseñas_de_hoteles) * 100)
+
+# Moda: categoría con la mayor frecuencia
+moda <- names(tabla_reseñas_de_hoteles[which.max(tabla_reseñas_de_hoteles)])
+
+# Mediana: primera categoría donde el porcentaje acumulado >= 50%
+indice_mediana <- which(porcentajes_acumulados >= 50)[1]
+mediana_reseñas_de_hoteles <- names(tabla_reseñas_de_hoteles)[indice_mediana]
+
+# Imprimir resultados
+print(tabla_reseñas_de_hoteles)
+print(porcentajes)
+print(paste("La moda del nivel educativo es:", moda))
+print(paste("La mediana del nivel educativo es:", mediana_reseñas_de_hoteles))
+
+# Paleta de colores para todas las gráficas (definida una vez)
+colores_reseñas_de_hoteles <- rainbow(length(levels(reseñas_de_hoteles_factor)), s = 0.85, v = 0.9)
+names(colores_reseñas_de_hoteles) <- levels(reseñas_de_hoteles_factor)
+```
+
+## Gráfico de Barras (Frecuencias Absolutas)
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Ajuste de márgenes para etiquetas X rotadas y leyenda
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(tabla_reseñas_de_hoteles,
+              col = colores_reseñas_de_hoteles,
+              main="Frecuencia de Reseña de Hoteles",
+              xlab = "Nivel Reseñas",
+              ylab = "Frecuencias",
+              las = 2,
+              ylim = c(0, max(tabla_reseñas_de_hoteles) * 1.2),
+              cex.names = 0.9)
+
+text(x = bp, y = tabla_reseñas_de_hoteles, labels = tabla_reseñas_de_hoteles, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste(names(tabla_reseñas_de_hoteles), ":", tabla_reseñas_de_hoteles),
+       fill = colores_reseñas_de_hoteles, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = colores_reseñas_de_hoteles,
+              main = '% de Reseñas de Hoteles',
+              xlab = "Nivel de Reseñas",
+              ylab = "Porcentaje",
+              las = 2,
+              ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.9, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste0(names(tabla_reseñas_de_hoteles), ": ", porcentajes, "%"),
+       fill = colores_reseñas_de_hoteles, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_reseñas_de_hoteles) * 100, 1)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_reseñas_de_hoteles,
+    main = "Distribución de las Reseñas de Hoteles",
+    col = colores_reseñas_de_hoteles,
+    labels = paste0(names(tabla_reseñas_de_hoteles), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+posiciones <- 1:length(tabla_reseñas_de_hoteles)
+freq_acum_pct <- cumsum(prop.table(tabla_reseñas_de_hoteles) * 100) # Usar la misma que para la mediana
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Reseña de Hoteles",
+     xlab = "Nivel de Reseñas",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_reseñas_de_hoteles),
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2) # Línea para la mediana
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+x_mediana_plot <- posiciones[indice_mediana] 
+points(x_mediana_plot, 50, col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, 50, paste0("Mediana: ", mediana_reseñas_de_hoteles),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Rangos*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los niveles educativos de 40 personas
+
+```{r}
+# Datos de niveles educativos de 40 personas
+rangos <- c("Principiante", "Principiante", "Aprendiz", "Intermedio", "Experto", 
+"Intermedio", "Experto", "Aprendiz", "Principiante", "Avanzado", 
+"Intermedio", "Experto", "Experto", "Experto", "Avanzado", "Intermedio", 
+"Intermedio", "Principiante", "Principiante", "Principiante", 
+"Principiante", "Principiante", "Intermedio", "Aprendiz", "Aprendiz", 
+"Aprendiz", "Aprendiz", "Intermedio", "Aprendiz", "Principiante", 
+"Intermedio", "Avanzado", "Avanzado", "Intermedio", "Avanzado", 
+"Principiante", "Intermedio", "Avanzado", "Intermedio", "Avanzado"
+)
+
+# Define los niveles en el ORDEN LÓGICO Y DESEADO para la variable ordinal
+niveles_rangos <- c("Aprendiz", "Avanzado", "Experto", "Intermedio", "Principiante")
+
+rangos_factor <- factor(rangos,
+                                 levels = niveles_rangos, ordered = TRUE)
+
+```
+
+## Procesamiento de datos
+
+```{r}
+# Tabla de frecuencias
+tabla_rangos <- table(rangos_factor)
+
+# Porcentajes (0 decimales para gráficos de barras, 1 para pastel si se prefiere)
+porcentajes <- round(prop.table(tabla_rangos) * 100, 0)
+
+# Porcentajes acumulados para la mediana
+porcentajes_acumulados <- cumsum(prop.table(tabla_rangos) * 100)
+
+# Moda: categoría con la mayor frecuencia
+moda <- names(tabla_rangos[which.max(tabla_rangos)])
+
+# Mediana: primera categoría donde el porcentaje acumulado >= 50%
+indice_mediana <- which(porcentajes_acumulados >= 50)[1]
+mediana_rangos <- names(tabla_rangos)[indice_mediana]
+
+# Imprimir resultados
+print(tabla_rangos)
+print(porcentajes)
+print(paste("La moda del nivel educativo es:", moda))
+print(paste("La mediana del nivel educativo es:", mediana_rangos))
+
+# Paleta de colores para todas las gráficas (definida una vez)
+colores_rangos <- rainbow(length(levels(rangos_factor)), s = 0.85, v = 0.9)
+names(colores_rangos) <- levels(rangos_factor)
+```
+
+## Gráfico de Barras (Frecuencias Absolutas)
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+# Ajuste de márgenes para etiquetas X rotadas y leyenda
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(tabla_rangos,
+              col = colores_rangos,
+              main="Frecuencia de Rangos",
+              xlab = "Nivel Rango",
+              ylab = "Frecuencias",
+              las = 2,
+              ylim = c(0, max(tabla_rangos) * 1.2),
+              cex.names = 0.9)
+
+text(x = bp, y = tabla_rangos, labels = tabla_rangos, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste(names(tabla_rangos), ":", tabla_rangos),
+       fill = colores_rangos, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+old_par <- par(no.readonly = TRUE)
+par(mar = c(8, 4, 4, 10) + 0.1, mgp = c(5, 1, 0))
+
+bp <- barplot(porcentajes,
+              col = colores_rangos,
+              main = '% de Rangos',
+              xlab = "Rango",
+              ylab = "Porcentaje",
+              las = 2,
+              ylim = c(0, max(porcentajes) * 1.2),
+              cex.names = 0.9, border = "black")
+
+text(x = bp, y = porcentajes, labels = porcentajes, pos = 3, cex = 0.8)
+
+legend("topright", inset = c(-0.25, 0), xpd = TRUE,
+       legend = paste0(names(tabla_rangos), ": ", porcentajes, "%"),
+       fill = colores_rangos, cex = 0.7, bty = "n")
+
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_rangos) * 100, 1)
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_rangos,
+    main = "Distribución de Rangos",
+    col = colores_rangos,
+    labels = paste0(names(tabla_rangos), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8
+)
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+```{r}
+posiciones <- 1:length(tabla_rangos)
+freq_acum_pct <- cumsum(prop.table(tabla_rangos) * 100) # Usar la misma que para la mediana
+
+old_par <- par(no.readonly = TRUE)
+par(mar = c(9, 4, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Rangos",
+     xlab = "Nivel Rango",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xaxt = "n")
+
+axis(1, at = posiciones, labels = names(tabla_rangos),
+     las = 2, cex.axis = 0.8)
+
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2) # Línea para la mediana
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+x_mediana_plot <- posiciones[indice_mediana] 
+points(x_mediana_plot, 50, col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, 50, paste0("Mediana: ", mediana_rangos),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Número de estudiantes en un salón*
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+n_de_estudiantes_en_un_salón <- c(35, 37, 13, 6, 40, 42, 11, 24, 24,
+ 33, 8, 34, 21, 23, 34, 24, 45, 39, 38, 35, 9, 39, 38, 45, 7, 35, 22, 28, 38,
+ 6, 5, 45, 36, 18, 37, 45, 13, 31, 23, 43)
+table(n_de_estudiantes_en_un_salón)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(n_de_estudiantes_en_un_salón)
+```
+
+Como es discreta, no hay necesidad de ordenar para deciles o cuartiles,
+pero calculamos las medidas de tendencia central y de dispersión.
+
+```{r}
+# Medidas de tendencia central
+media <- mean(n_de_estudiantes_en_un_salón)
+mediana <- median(n_de_estudiantes_en_un_salón)
+# La moda es la categoría con mayor frecuencia, como en las nominales/ordinales
+tabla_frec <- table(n_de_estudiantes_en_un_salón)
+moda <- as.numeric(names(tabla_frec)[which.max(tabla_frec)])
+
+# Medidas de dispersión
+rango <- max(n_de_estudiantes_en_un_salón) - min(n_de_estudiantes_en_un_salón)
+desviacion_estandar <- sd(n_de_estudiantes_en_un_salón)
+varianza <- var(n_de_estudiantes_en_un_salón)
+
+# Imprimir resultados
+print(paste("La media es:", media))
+print(paste("La mediana es:", mediana))
+print(paste("La moda es:", moda))
+print(paste("La desviación estándar es:", round(desviacion_estandar, 2)))
+print(paste("El rango es:", rango))
+```
+
+## Gráfica con el comando *plot*
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+plot(
+  n_de_estudiantes_en_un_salón,
+  main = " Número de estudiantes en un salón",
+  xlab = "Índice de la Estudiantes",
+  ylab = "Número de Estudiantes",
+  col = "blue",
+  pch = 19,
+  cex = 0.5,
+  cex.main = 1.5,
+  cex.lab = 1.2,
+  col.main = "darkred"
+)
+
+# Añadir líneas para la media y mediana
+abline(h = media, col = "red", lwd = 1, lty = 2)
+abline(h = mediana, col = "lightgreen", lwd = 1, lty = 3)
+
+# Leyenda para las líneas
+legend(
+  "topright",
+  legend = c(paste("Media:", round(media, 2)), paste("Mediana:", mediana)),
+  col = c("red", "lightgreen"),
+  lty = c(2, 3),
+  lwd = 1,
+  cex = 0.8,
+  bty = "n"
+)
+
+# Restaurar la configuración original al finalizar
+par(old_par)
+```
+
+## Generación de *Gráficos de Barras*
+
+Un gráfico de barras es el más adecuado para visualizar frecuencias de variables discretas
+
+```{r}
+# Crear una tabla de frecuencias
+tabla_n_estudiantes <- table(n_de_estudiantes_en_un_salón)
+
+# Definir una paleta de colores
+miscolores <- rainbow(length(tabla_n_estudiantes), 0.85)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1) # Ajuste de márgenes estándar
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_n_estudiantes,
+              col = miscolores,
+              main = "Frecuencia de estudiantes en un salón",
+              xlab = "Número de Estudiantes",
+              ylab = "Frecuencias",
+              ylim = c(0, max(tabla_n_estudiantes) * 1.2))
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_n_estudiantes, labels = tabla_n_estudiantes, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Diagrama de tallo y hoja (Stem-and-Leaf Plot)
+
+Este gráfico es muy útil para visualizar la distribución de datos discretos pequeños
+
+```{r}
+# Mostrar el diagrama de tallo y hoja
+stem(n_de_estudiantes_en_un_salón)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+# Calcular porcentajes
+porcentajes <- round(prop.table(tabla_n_estudiantes) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Crear el gráfico de barras con más espacio entre barras
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = '% de estudiantes en un salón',
+                  xlab = "Número de Estudiantes",
+                  ylab = "Porcentaje",
+                  ylim = c(0, max(porcentajes) * 1.3),
+                  border = "black",
+                  space = 1,  # Más espacio entre barras
+                  cex.names = 0.9,  # Tamaño de texto en eje X
+                  cex.axis = 0.9)   # Tamaño de números en ejes
+
+# Añadir etiquetas de porcentaje con mejor posicionamiento
+text(x = bp_pct, 
+     y = porcentajes + max(porcentajes) * 0.02, 
+     labels = paste0(porcentajes, "%"), 
+     pos = 3, 
+     cex = 0.8)  
+
+# Restaurar configuración original
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Recalcular porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_n_estudiantes) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_n_estudiantes,
+    main = "Distribución del Número de estudiantes en un salón",
+    col = miscolores,
+    labels = paste0(names(tabla_n_estudiantes), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+La ojiva tiene una interpretación válida para variables discretas porque las categorías
+tienen un orden natural y los valores son acumulativos
+
+```{r}
+# Calcular frecuencias acumuladas
+freq_acum_abs <- cumsum(tabla_n_estudiantes)
+freq_acum_pct <- cumsum(prop.table(tabla_n_estudiantes) * 100)
+
+# Posiciones en el eje X (los valores únicos de tabla_n_estudiantes)
+posiciones <- as.numeric(names(tabla_n_estudiantes))
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1)
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Número de estudiantes en un salón",
+     xlab = "Número de Estudiantes",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xlim = range(posiciones), # Asegura que el eje X abarca todos los puntos
+     axes = FALSE)
+
+# Añadir ejes manualmente
+axis(1, at = posiciones)
+axis(2)
+
+# Añadir líneas de referencia para 100% y 50% (mediana)
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2)
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+# Buscamos la primera posición donde la frecuencia acumulada supera el 50%
+indice_mediana <- which(freq_acum_pct >= 50)[1]
+x_mediana_plot <- posiciones[indice_mediana]
+points(x_mediana_plot, freq_acum_pct[indice_mediana], col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, freq_acum_pct[indice_mediana], paste0("Mediana: ", mediana),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Número de autos por familia*
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los Número de autos por familia
+
+```{r}
+n_de_autos_por_familia <- c(2, 1, 0, 0, 1, 1, 0, 0, 3, 3, 1, 0, 1, 1, 1, 0,
+ 1, 1, 3, 2, 1, 2, 1, 0, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1,
+ 2, 0, 0, 1, 0, 1, 2, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 2, 2, 1, 2, 1, 0, 0, 0,
+ 0, 0, 3, 3, 1)
+table(n_de_autos_por_familia)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(n_de_autos_por_familia)
+```
+
+Como es discreta, no hay necesidad de ordenar para deciles o cuartiles,
+pero calculamos las medidas de tendencia central y de dispersión.
+
+```{r}
+# Medidas de tendencia central
+media <- mean(n_de_autos_por_familia)
+mediana <- median(n_de_autos_por_familia)
+# La moda es la categoría con mayor frecuencia, como en las nominales/ordinales
+tabla_frec <- table(n_de_autos_por_familia)
+moda <- as.numeric(names(tabla_frec)[which.max(tabla_frec)])
+
+# Medidas de dispersión
+rango <- max(n_de_autos_por_familia) - min(n_de_autos_por_familia)
+desviacion_estandar <- sd(n_de_autos_por_familia)
+varianza <- var(n_de_autos_por_familia)
+
+# Imprimir resultados
+print(paste("La media es:", media))
+print(paste("La mediana es:", mediana))
+print(paste("La moda es:", moda))
+print(paste("La desviación estándar es:", round(desviacion_estandar, 2)))
+print(paste("El rango es:", rango))
+```
+
+## Gráfica con el comando *plot*
+
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+plot(
+  n_de_autos_por_familia,
+  main = " Número de de autos por familia",
+  xlab = "Índice de la Autos",
+  ylab = "Número de Autos",
+  col = "blue",
+  pch = 19,
+  cex = 0.5,
+  cex.main = 1.5,
+  cex.lab = 1.2,
+  col.main = "darkred"
+)
+
+# Añadir líneas para la media y mediana
+abline(h = media, col = "red", lwd = 1, lty = 2)
+abline(h = mediana, col = "lightgreen", lwd = 1, lty = 3)
+
+# Leyenda para las líneas
+legend(
+  "topright",
+  legend = c(paste("Media:", round(media, 2)), paste("Mediana:", mediana)),
+  col = c("red", "lightgreen"),
+  lty = c(2, 3),
+  lwd = 1,
+  cex = 0.8,
+  bty = "n"
+)
+
+# Restaurar la configuración original al finalizar
+par(old_par)
+```
+
+## Generación de *Gráficos de Barras*
+
+Un gráfico de barras es el más adecuado para visualizar frecuencias de variables discretas
+
+```{r}
+# Crear una tabla de frecuencias
+tabla_n_autos <- table(n_de_autos_por_familia)
+
+# Definir una paleta de colores
+miscolores <- rainbow(length(tabla_n_autos), 0.85)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1) # Ajuste de márgenes estándar
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_n_autos,
+              col = miscolores,
+              main = "Frecuencia de autos por familia",
+              xlab = "Número de Autos",
+              ylab = "Frecuencias",
+              ylim = c(0, max(tabla_n_autos) * 1.2))
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_n_autos, labels = tabla_n_autos, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Diagrama de tallo y hoja (Stem-and-Leaf Plot)
+
+Este gráfico es muy útil para visualizar la distribución de datos discretos pequeños
+
+```{r}
+# Mostrar el diagrama de tallo y hoja
+stem(n_de_autos_por_familia)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+# Calcular porcentajes
+porcentajes <- round(prop.table(tabla_n_autos) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Crear el gráfico de barras con más espacio entre barras
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = '% de autos por familia',
+                  xlab = "Número de Autos",
+                  ylab = "Porcentaje",
+                  ylim = c(0, max(porcentajes) * 1.3),
+                  border = "black",
+                  space = 1,  # Más espacio entre barras
+                  cex.names = 0.9,  # Tamaño de texto en eje X
+                  cex.axis = 0.9)   # Tamaño de números en ejes
+
+# Añadir etiquetas de porcentaje con mejor posicionamiento
+text(x = bp_pct, 
+     y = porcentajes + max(porcentajes) * 0.02, 
+     labels = paste0(porcentajes, "%"), 
+     pos = 3, 
+     cex = 0.8)  
+
+# Restaurar configuración original
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Recalcular porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_n_autos) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_n_autos,
+    main = "Distribución del Número de estudiantes en un salón",
+    col = miscolores,
+    labels = paste0(names(tabla_n_autos), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+La ojiva tiene una interpretación válida para variables discretas porque las categorías
+tienen un orden natural y los valores son acumulativos
+
+```{r}
+# Calcular frecuencias acumuladas
+freq_acum_abs <- cumsum(tabla_n_autos)
+freq_acum_pct <- cumsum(prop.table(tabla_n_autos) * 100)
+
+# Posiciones en el eje X (los valores únicos de tabla_n_estudiantes)
+posiciones <- as.numeric(names(tabla_n_autos))
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1)
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Número de autos por familia",
+     xlab = "Número de Autos",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xlim = range(posiciones), # Asegura que el eje X abarca todos los puntos
+     axes = FALSE)
+
+# Añadir ejes manualmente
+axis(1, at = posiciones)
+axis(2)
+
+# Añadir líneas de referencia para 100% y 50% (mediana)
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2)
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+# Buscamos la primera posición donde la frecuencia acumulada supera el 50%
+indice_mediana <- which(freq_acum_pct >= 50)[1]
+x_mediana_plot <- posiciones[indice_mediana]
+points(x_mediana_plot, freq_acum_pct[indice_mediana], col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, freq_acum_pct[indice_mediana], paste0("Mediana: ", mediana),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Goles en un partido*
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los goles de un partido de 
+
+```{r}
+goles_en_un_partido <- c(0, 1, 1, 0, 0, 1, 2, 0, 4, 0, 0, 0, 3, 0, 2, 3, 1, 1, 0, 1,
+ 3, 0, 0, 4, 0, 1, 0, 4, 3, 3, 1, 2, 0, 0, 4, 4, 1, 2, 0, 0, 1, 0, 0, 4, 1, 3, 1,
+ 0, 1, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 4, 3, 1, 1, 0, 0, 3, 0, 1, 1, 0, 1, 0, 1, 1,
+ 0, 3, 0, 1, 3, 0, 0, 3, 1, 3, 1, 3, 0, 1, 2, 0, 1, 1, 3, 0, 1, 0, 0, 1, 1, 2)
+table(goles_en_un_partido)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(goles_en_un_partido)
+```
+
+Como es discreta, no hay necesidad de ordenar para deciles o cuartiles,
+pero calculamos las medidas de tendencia central y de dispersión.
+
+```{r}
+# Medidas de tendencia central
+media <- mean(goles_en_un_partido)
+mediana <- median(goles_en_un_partido)
+# La moda es la categoría con mayor frecuencia, como en las nominales/ordinales
+tabla_frec <- table(goles_en_un_partido)
+moda <- as.numeric(names(tabla_frec)[which.max(tabla_frec)])
+
+# Medidas de dispersión
+rango <- max(goles_en_un_partido) - min(goles_en_un_partido)
+desviacion_estandar <- sd(goles_en_un_partido)
+varianza <- var(goles_en_un_partido)
+
+# Imprimir resultados
+print(paste("La media es:", media))
+print(paste("La mediana es:", mediana))
+print(paste("La moda es:", moda))
+print(paste("La desviación estándar es:", round(desviacion_estandar, 2)))
+print(paste("El rango es:", rango))
+```
+
+## Gráfica con el comando *plot*
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+plot(
+  goles_en_un_partido,
+  main = "Goles en un partido",
+  xlab = "Índice de Goles",
+  ylab = "Goles",
+  col = "blue",
+  pch = 19,
+  cex = 0.5,
+  cex.main = 1.5,
+  cex.lab = 1.2,
+  col.main = "darkred"
+)
+
+# Añadir líneas para la media y mediana
+abline(h = media, col = "red", lwd = 1, lty = 2)
+abline(h = mediana, col = "lightgreen", lwd = 1, lty = 3)
+
+# Leyenda para las líneas
+legend(
+  "topright",
+  legend = c(paste("Media:", round(media, 2)), paste("Mediana:", mediana)),
+  col = c("red", "lightgreen"),
+  lty = c(2, 3),
+  lwd = 1,
+  cex = 0.8,
+  bty = "n"
+)
+
+# Restaurar la configuración original al finalizar
+par(old_par)
+```
+
+## Generación de *Gráficos de Barras*
+
+Un gráfico de barras es el más adecuado para visualizar frecuencias de variables discretas
+
+```{r}
+# Crear una tabla de frecuencias
+tabla_goles_en_un_partido <- table(goles_en_un_partido)
+
+# Definir una paleta de colores
+miscolores <- rainbow(length(tabla_goles_en_un_partido), 0.85)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1) # Ajuste de márgenes estándar
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_goles_en_un_partido,
+              col = miscolores,
+              main = "Frecuencia de Goles en un partido",
+              xlab = "Número de Goles",
+              ylab = "Frecuencias",
+              ylim = c(0, max(tabla_goles_en_un_partido) * 1.2))
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_goles_en_un_partido, labels = tabla_goles_en_un_partido, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Diagrama de tallo y hoja (Stem-and-Leaf Plot)
+
+Este gráfico es muy útil para visualizar la distribución de datos discretos pequeños
+
+```{r}
+# Mostrar el diagrama de tallo y hoja
+stem(goles_en_un_partido)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+# Calcular porcentajes
+porcentajes <- round(prop.table(tabla_goles_en_un_partido) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Crear el gráfico de barras con más espacio entre barras
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = '% de goles en un partido',
+                  xlab = "Número de Goles",
+                  ylab = "Porcentaje",
+                  ylim = c(0, max(porcentajes) * 1.3),
+                  border = "black",
+                  space = 1,  # Más espacio entre barras
+                  cex.names = 0.9,  # Tamaño de texto en eje X
+                  cex.axis = 0.9)   # Tamaño de números en ejes
+
+# Añadir etiquetas de porcentaje con mejor posicionamiento
+text(x = bp_pct, 
+     y = porcentajes + max(porcentajes) * 0.02, 
+     labels = paste0(porcentajes, "%"), 
+     pos = 3, 
+     cex = 0.8)  
+
+# Restaurar configuración original
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Recalcular porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_goles_en_un_partido) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_goles_en_un_partido,
+      main = "Distribución del Goles en un partido",
+    col = miscolores,
+    labels = paste0(names(tabla_goles_en_un_partido), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+La ojiva tiene una interpretación válida para variables discretas porque las categorías
+tienen un orden natural y los valores son acumulativos
+
+```{r}
+# Calcular frecuencias acumuladas
+freq_acum_abs <- cumsum(tabla_goles_en_un_partido)
+freq_acum_pct <- cumsum(prop.table(tabla_goles_en_un_partido) * 100)
+
+# Posiciones en el eje X (los valores únicos de tabla_n_estudiantes)
+posiciones <- as.numeric(names(tabla_goles_en_un_partido))
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1)
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Goles en un partido",
+     xlab = "Número de Goles",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xlim = range(posiciones), # Asegura que el eje X abarca todos los puntos
+     axes = FALSE)
+
+# Añadir ejes manualmente
+axis(1, at = posiciones)
+axis(2)
+
+# Añadir líneas de referencia para 100% y 50% (mediana)
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2)
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+# Buscamos la primera posición donde la frecuencia acumulada supera el 50%
+indice_mediana <- which(freq_acum_pct >= 50)[1]
+x_mediana_plot <- posiciones[indice_mediana]
+points(x_mediana_plot, freq_acum_pct[indice_mediana], col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, freq_acum_pct[indice_mediana], paste0("Mediana: ", mediana),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Accidentes en una vialidad*
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los Accidentes en una vialidad
+
+```{r}
+accidentes <- c(22, 24, 35, 8, 12, 33, 17, 31, 24, 12, 6, 14,
+ 26, 8, 41, 3, 15, 7, 3, 23, 10, 17, 3, 7, 1, 11, 19, 4, 33, 7, 10, 2, 2, 19,
+ 1, 15, 7, 16, 13, 3, 26, 4, 16, 18, 27, 18, 17, 32, 25, 22, 34, 40, 47, 35,
+ 19, 27, 12, 44, 37, 27, 40, 18, 28, 16, 31, 37, 32, 44, 29, 35, 25, 28, 27,
+ 31, 33, 21, 41, 20, 39, 28, 22, 34, 27, 28, 37, 26, 29, 37, 38, 26, 38, 53,
+ 39, 41, 35, 57, 27, 41, 41, 72, 53, 64, 67, 46, 44, 31, 47, 56, 56, 63, 47,
+ 58, 44, 32, 70, 53, 59, 51, 70, 44, 51, 52, 46, 44, 46, 41, 54, 63, 46, 47,
+ 37, 60, 34, 49, 63, 42, 48, 44, 65, 63, 45, 63, 42, 58, 43, 54, 90, 55, 57,
+ 54, 55, 46, 46, 46, 55, 23, 39, 35, 44, 58, 68, 44, 11, 23, 24, 13, 47, 49)
+table(accidentes)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(accidentes)
+```
+
+Como es discreta, no hay necesidad de ordenar para deciles o cuartiles,
+pero calculamos las medidas de tendencia central y de dispersión.
+
+```{r}
+# Medidas de tendencia central
+media <- mean(accidentes)
+mediana <- median(accidentes)
+# La moda es la categoría con mayor frecuencia, como en las nominales/ordinales
+tabla_frec <- table(accidentes)
+moda <- as.numeric(names(tabla_frec)[which.max(tabla_frec)])
+
+# Medidas de dispersión
+rango <- max(accidentes) - min(accidentes)
+desviacion_estandar <- sd(accidentes)
+varianza <- var(accidentes)
+
+# Imprimir resultados
+print(paste("La media es:", media))
+print(paste("La mediana es:", mediana))
+print(paste("La moda es:", moda))
+print(paste("La desviación estándar es:", round(desviacion_estandar, 2)))
+print(paste("El rango es:", rango))
+```
+
+## Gráfica con el comando *plot*
+
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+plot(
+  accidentes,
+  main = " Número de Accidentes en una vialidad",
+  xlab = "Índice de la Accidentes",
+  ylab = "Accidentes",
+  col = "blue",
+  pch = 19,
+  cex = 0.5,
+  cex.main = 1.5,
+  cex.lab = 1.2,
+  col.main = "darkred"
+)
+
+# Añadir líneas para la media y mediana
+abline(h = media, col = "red", lwd = 1, lty = 2)
+abline(h = mediana, col = "lightgreen", lwd = 1, lty = 3)
+
+# Leyenda para las líneas
+legend(
+  "topright",
+  legend = c(paste("Media:", round(media, 2)), paste("Mediana:", mediana)),
+  col = c("red", "lightgreen"),
+  lty = c(2, 3),
+  lwd = 1,
+  cex = 0.8,
+  bty = "n"
+)
+
+# Restaurar la configuración original al finalizar
+par(old_par)
+```
+
+## Generación de *Gráficos de Barras*
+
+Un gráfico de barras es el más adecuado para visualizar frecuencias de variables discretas
+
+```{r}
+# Crear una tabla de frecuencias
+tabla_accidentes <- table(accidentes)
+
+# Definir una paleta de colores
+miscolores <- rainbow(length(tabla_accidentes), 0.85)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1) # Ajuste de márgenes estándar
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_accidentes,
+              col = miscolores,
+              main = "Frecuencia de Accidentes en una vialidad",
+              xlab = "Número de Accidentes",
+              ylab = "Frecuencias",
+              ylim = c(0, max(tabla_accidentes) * 1.2))
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_accidentes, labels = tabla_accidentes, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Diagrama de tallo y hoja (Stem-and-Leaf Plot)
+
+Este gráfico es muy útil para visualizar la distribución de datos discretos pequeños
+
+```{r}
+# Mostrar el diagrama de tallo y hoja
+stem(accidentes)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+# Calcular porcentajes
+porcentajes <- round(prop.table(tabla_accidentes) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Crear el gráfico de barras con más espacio entre barras
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = '% de Accidentes en una vialidad',
+                  xlab = "Número de Accidentes",
+                  ylab = "Porcentaje",
+                  ylim = c(0, max(porcentajes) * 1.3),
+                  border = "black",
+                  space = 1,  # Más espacio entre barras
+                  cex.names = 0.9,  # Tamaño de texto en eje X
+                  cex.axis = 0.9)   # Tamaño de números en ejes
+
+# Añadir etiquetas de porcentaje con mejor posicionamiento
+text(x = bp_pct, 
+     y = porcentajes + max(porcentajes) * 0.02, 
+     labels = paste0(porcentajes, "%"), 
+     pos = 3, 
+     cex = 0.8)  
+
+# Restaurar configuración original
+par(old_par)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Recalcular porcentajes con un decimal para el pastel
+porcentajes_pastel <- round(prop.table(tabla_accidentes) * 100, 1)
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1) # Márgenes ajustados para el pastel
+
+pie(tabla_accidentes,
+    main = "Distribución del Número de Accidentes en una vialidad",
+    col = miscolores,
+    labels = paste0(names(tabla_accidentes), "\n", porcentajes_pastel, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfica de Ojiva
+
+La ojiva tiene una interpretación válida para variables discretas porque las categorías
+tienen un orden natural y los valores son acumulativos
+
+```{r}
+# Calcular frecuencias acumuladas
+freq_acum_abs <- cumsum(tabla_accidentes)
+freq_acum_pct <- cumsum(prop.table(tabla_accidentes) * 100)
+
+# Posiciones en el eje X (los valores únicos de tabla_n_estudiantes)
+posiciones <- as.numeric(names(tabla_accidentes))
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(5, 4, 4, 2) + 0.1)
+
+plot(posiciones, freq_acum_pct, type = "o",
+     main = "Ojiva - Accidentes en una vialidad",
+     xlab = "Número de Accidentes",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100),
+     xlim = range(posiciones), # Asegura que el eje X abarca todos los puntos
+     axes = FALSE)
+
+# Añadir ejes manualmente
+axis(1, at = posiciones)
+axis(2)
+
+# Añadir líneas de referencia para 100% y 50% (mediana)
+abline(h = 100, col = "red", lty = 2)
+abline(h = 50, col = "darkgreen", lty = 2)
+
+# Opcional: Añadir un punto y texto para la mediana calculada
+# Buscamos la primera posición donde la frecuencia acumulada supera el 50%
+indice_mediana <- which(freq_acum_pct >= 50)[1]
+x_mediana_plot <- posiciones[indice_mediana]
+points(x_mediana_plot, freq_acum_pct[indice_mediana], col = "darkgreen", pch = 19, cex = 1.5)
+text(x_mediana_plot, freq_acum_pct[indice_mediana], paste0("Mediana: ", mediana),
+     pos = 4, col = "darkgreen", cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio de *Estatura en metros*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos en metros 
+
+```{r}
+metros <- c(1.57, 1.97, 1.85, 1.78, 1.62, 1.67, 1.92, 1.96, 1.76,
+ 1.94, 1.85, 1.71, 1.65, 1.98, 1.56, 1.84, 1.91, 1.61, 1.8, 1.58, 1.7, 1.62,
+ 1.76, 1.84, 1.95, 1.67, 1.62, 1.65, 1.61, 1.56, 1.63, 1.96, 1.53, 1.75, 1.9,
+ 1.92, 1.79, 1.62, 1.79, 1.57, 1.74, 1.55, 1.65, 1.84, 1.6, 1.7, 1.9, 1.61,
+ 1.54, 1.89, 1.84, 1.76, 1.61, 1.59, 1.81, 1.52, 1.61, 1.91, 1.65, 1.51,
+ 1.98, 1.54, 1.87, 1.92, 1.51, 1.93, 1.78, 1.67, 1.66, 1.82, 1.56, 1.66,
+ 1.79, 1.88, 1.78, 1.84, 1.69, 1.95, 1.99, 1.88, 1.51, 1.76, 1.9, 1.6, 1.69,
+ 1.77, 1.87, 1.67, 1.66, 1.71, 1.64, 1.81, 1.52, 1.8, 1.71, 1.52, 2, 1.81,
+ 1.92, 1.7)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(metros)
+```
+
+Ordenamos los datos
+
+```{r}
+metros_ord <- sort(metros)
+cte <- 9
+```
+
+Definimos un vector que nos servirá para calcular los deciles:
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+con base en lo anterior ahora podemos extraer los cuartiles
+
+```{r}
+mis_deciles <- metros_ord[t]; (mis_deciles)
+cuantiles <- quantile(metros); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+Calculemos la media, el valor máximo y el valor mínimo para los datos
+
+```{r}
+x_media <- mean(metros)
+mi_min <- min(metros); 
+mi_max <- max(metros);
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica simple de los datos
+
+```{r}
+plot(metros,main="Grafica de  Estatura en metros")
+```
+
+Ahora agreguemos detalles, etiquetas, título, colores, etc a la misma gráfica
+
+```{r}
+plot(
+  metros,
+  main = "Gráfica de Estatura en metros:",
+  xlab = "Índice del individuo",
+  ylab = "Estatura (m)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                  # ubicación
+  legend = c(mi_min,mi_max),    # etiquetas
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(metros), min(metros), col = "purple", pch = 17, cex = 1.5)
+points(which.max(metros), max(metros), col = "orange", pch = 17, cex = 1.5)
+```
+
+## Generación de *Histogramas*
+
+Con la misma idea que la gráfica anterior, generemos un histograma de los mismos datos
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(metros, breaks = nbreaks, col= miscolores, 
+          main = ' Estatura en metros',
+          xlab="Estatura",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+Mejoremos el gráfico agregando detalles, leyendas e información en la parte lateral de la gráfica
+
+```{r}
+##---- Mejora del grafico ----
+h2 <- hist(metros, breaks = nbreaks, col= miscolores, 
+          main = ' Estatura en metros:',
+          xlab="Estatura",
+          ylab="Frecuencias",
+          ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Histograma con porcentajes 
+
+```{r}
+##---- Grafico con porcentajes ----
+h3 <- hist(metros, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Estatura en metros:',
+           xlab="Estatura",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                  # ubicación
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Graficos de pastel ----
+# Tus datos
+nbreaks <- 10
+intervalos <- cut(metros, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Distribución de pesos (10 intervalos)",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+## Gráfica de Ojiva
+
+```{r}
+#---- Grafica de Ojiva ----
+##---- Grafica sencilla ----
+nbreaks <- 10
+h <- hist(metros, breaks = nbreaks, plot = FALSE)
+freq_acum <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+plot(x_vals, freq_acum, type = "o",
+     main = "Ojiva de  Estatura en metros",
+     xlab = "Estatura (m)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100))
+abline(h = 100, col = "red", lty = 2)
+```
+
+Mejoramos la gráfica anterior.
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(metros, breaks = nbreaks, plot = FALSE)
+hist(metros,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Estatura (m)",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           # eje derecho
+#---- Fin ----
+```
+
+# Ejercicio de *Nivel de contaminación en la delegación Iztapalapa en el mes de julio*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los  Nivel de contaminación en la delegación Iztapalapa en el mes de julio
+
+```{r}
+conta <- c(0.7, 0.4, 0.4, 0.5, 0.3, 0.3, 0.7, 0.5, 0.2, 0.2, 0.5, 0.8, 0.3, 0.9, 0.5, 0.2,
+ 0.4, 0.4, 0.7, 0.6, 0.8, 0.3, 1, 0.7, 1.5, 0.1, 0.1, 0.9, 0.1, 0.3, 0.9, 0.3,
+ 1.2, 1.2, 1.2, 0.6, 0.7, 0.4, 1.8, 0.2, 0.6, 0.7, 1.7, 0.4, 0.9, 0.2, 0.8, 1,
+ 0.7, 0.6, 0.7, 0.3, 0.5, 0.2, 1.2, 0.5, 0.8, 0.2, 0.4, 0.3, 0.4, 0.5, 0.5, 1.4,
+ 0.4)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(conta)
+```
+
+Ordenamos los datos
+
+```{r}
+conta_ord <- sort(conta)
+cte <- 9
+```
+
+Definimos un vector que nos servirá para calcular los deciles:
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+con base en lo anterior ahora podemos extraer los cuartiles
+
+```{r}
+mis_deciles <- conta_ord[t]; (mis_deciles)
+cuantiles <- quantile(conta); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+Calculemos la media, el valor máximo y el valor mínimo para los datos
+
+```{r}
+x_media <- mean(conta)
+mi_min <- min(conta); 
+mi_max <- max(conta);
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica simple de los datos
+
+```{r}
+plot(conta,main="Grafica de Nivel de contaminación en la delegación Iztapalapa en el mes de julio")
+```
+
+Ahora agreguemos detalles, etiquetas, título, colores, etc a la misma gráfica
+
+```{r}
+plot(
+  conta,
+  main = "Gráfica de Nivel de contaminación en la delegación Iztapalapa en el mes de julio",
+  xlab = "Índice del contaminación",
+  ylab = "Contaminación)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                  # ubicación
+  legend = c(mi_min,mi_max),    # etiquetas
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(conta), min(conta), col = "purple", pch = 17, cex = 1.5)
+points(which.max(conta), max(conta), col = "orange", pch = 17, cex = 1.5)
+```
+
+## Generación de *Histogramas*
+
+Con la misma idea que la gráfica anterior, generemos un histograma de los mismos datos
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(conta, breaks = nbreaks, col= miscolores, 
+          main = 'Nivel de contaminación en la delegación Iztapalapa en el mes de julio',
+          xlab="Contaminación",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+Mejoremos el gráfico agregando detalles, leyendas e información en la parte lateral de la gráfica
+
+```{r}
+##---- Mejora del grafico ----
+h2 <- hist(conta, breaks = nbreaks, col= miscolores, 
+          main = 'Nivel de contaminación en la delegación Iztapalapa en el mes de julio',
+          xlab="Contaminación",
+          ylab="Frecuencias",
+          ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Histograma con porcentajes 
+
+```{r}
+##---- Grafico con porcentajes ----
+h3 <- hist(conta, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Nivel de contaminación en la delegación Iztapalapa en el mes de julio',
+           xlab="Contaminación",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                  # ubicación
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Graficos de pastel ----
+# Tus datos
+nbreaks <- 10
+intervalos <- cut(conta, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Distribución de pesos (10 intervalos)",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+## Gráfica de Ojiva
+
+```{r}
+#---- Grafica de Ojiva ----
+##---- Grafica sencilla ----
+nbreaks <- 10
+h <- hist(conta, breaks = nbreaks, plot = FALSE)
+freq_acum <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+plot(x_vals, freq_acum, type = "o",
+     main = "Ojiva de Nivel de contaminación en la delegación Iztapalapa en el mes de julio",
+     xlab = "Contaminación",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100))
+abline(h = 100, col = "red", lty = 2)
+```
+
+Mejoramos la gráfica anterior.
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(conta, breaks = nbreaks, plot = FALSE)
+hist(conta,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Contaminación",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           # eje derecho
+#---- Fin ----
+```
+
+# Ejercicio *Tiempos de traslado en horas*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a Tiempos de traslado en horas
+
+```{r}
+tiem <- c(1.5, 1.3, 1.1, 0.6, 0.9, 1.4, 0.8, 1.7, 1.7,
+ 1.6, 1.7, 1.3, 1.5, 0.5, 1.4, 0.6, 1.5, 1.9, 0.7, 1.9, 2, 1.6, 0.7, 1.6, 0.7,
+ 0.5, 0.6, 1.6, 1.4, 1.9, 1.9, 1, 1.7, 1.7, 1.8, 1.6, 1.4, 1.4, 0.7, 0.8, 1.5,
+ 0.8, 1.9, 1.2, 1.9, 1.8, 1.7, 1.5, 1.5, 0.7, 1.8, 1.3, 1.8, 0.6, 1.5, 1.4, 1.3,
+ 1.3, 0.8, 1.4, 0.6, 1.1, 1.1, 0.6, 1.7, 0.5, 2, 1.7, 0.7, 1, 0.6, 1.8, 1.1, 1.6,
+ 1, 1.1, 1.8, 0.8, 1.1, 1.7, 1.4, 1.4, 1.2, 1.5, 1.6, 1.6, 1.5, 0.5, 1.4, 1.1, 1,
+ 0.9, 0.6, 1.7, 1.6, 1.2, 0.6, 1.2, 1.2, 1.8)
+```
+
+## Procesamiento de datos
+
+Primero obtenemos un resumen de los datos generados
+
+```{r}
+summary(tiem)
+```
+
+Ordenamos los datos
+
+```{r}
+tiem_ord <- sort(tiem)
+cte <- 9
+```
+
+Definimos un vector que nos servirá para calcular los deciles:
+
+```{r}
+indices <- 1:10; (indices)
+t <- cte*indices; (t)
+```
+
+con base en lo anterior ahora podemos extraer los cuartiles
+
+```{r}
+mis_deciles <- tiem_ord[t]; (mis_deciles)
+cuantiles <- quantile(tiem); (cuantiles)
+Q1 <- cuantiles[2]; (Q1)
+Q2 <- cuantiles[3]; (Q2)
+Q3 <- cuantiles[4]; (Q3)
+```
+
+Calculemos la media, el valor máximo y el valor mínimo para los datos
+
+```{r}
+x_media <- mean(tiem)
+mi_min <- min(tiem); 
+mi_max <- max(tiem);
+```
+
+## Gráficas con el comando *plot*
+Generemos una gráfica simple de los datos
+
+```{r}
+plot(tiem,main="Grafica de Tiempos de traslado en horas")
+```
+
+Ahora agreguemos detalles, etiquetas, título, colores, etc a la misma gráfica
+
+```{r}
+plot(
+  tiem,
+  main = "Gráfica de Tiempos de traslado en horas",
+  xlab = "Índice del traslados",
+  ylab = "Tiempo (h)",
+  col = "blue",       
+  pch = 19,           
+  cex = 0.5,          
+  cex.main = 1.5,     
+  cex.lab = 1.2,      
+  col.main = "darkred")
+legend(
+  "topright",                  # ubicación
+  legend = c(mi_min,mi_max),    # etiquetas
+  pch = 17,
+  col=c("purple","orange"),
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+abline(h = x_media, col = "red", lwd = 1, lty = 2)     
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3) 
+abline(h = mis_deciles, col = "lightgray", lty = 1.5)
+points(which.min(tiem), min(tiem), col = "purple", pch = 17, cex = 1.5)
+points(which.max(tiem), max(tiem), col = "orange", pch = 17, cex = 1.5)
+```
+
+## Generación de *Histogramas*
+
+Con la misma idea que la gráfica anterior, generemos un histograma de los mismos datos
+
+```{r}
+nbreaks=10;
+miscolores <- rainbow(25,0.85);
+h <- hist(tiem, breaks = nbreaks, col= miscolores, 
+          main = 'Tiempos de traslado en horas',
+          xlab="Tiempo",
+          ylab="Frecuencias")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.4, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.7,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+Mejoremos el gráfico agregando detalles, leyendas e información en la parte lateral de la gráfica
+
+```{r}
+##---- Mejora del grafico ----
+h2 <- hist(tiem, breaks = nbreaks, col= miscolores, 
+          main = 'Tiempos de traslado en horas',
+          xlab="Tiempo",
+          ylab="Frecuencias",
+          ylim=c(0,max(h$counts)*1.5))
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, 
+     col = "black")
+nl <- length(h$counts); 
+legend(
+  "topright",                  # ubicación
+  legend = h$counts,    # etiquetas
+  fill = miscolores,
+  col = miscolores,    # colores (uno por cada símbolo)
+  pt.cex = 1.5,                # tamaño de los símbolos
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Histograma con porcentajes 
+
+```{r}
+##---- Grafico con porcentajes ----
+h3 <- hist(tiem, 
+           breaks = nbreaks, 
+           col= miscolores, 
+           main = 'Tiempos de traslado en horas',
+           xlab="Tiempo",
+           ylab="Porcentaje",
+           ylim=c(0,max(h$density)*1.5),
+           probability=TRUE)
+porcentajes <- h3$counts/sum(h3$counts)*100
+
+text(h3$mids, 
+     h3$density, 
+     labels = paste0(round(porcentajes,1),"%"),
+     pos = 3, 
+     cex = 0.8, 
+     col = "black")
+
+nl <- length(h3$counts); (nl)
+legend(
+  "topright",                  # ubicación
+  legend = paste0(round(porcentajes,1),"%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"                    # sin borde en la caja
+)
+```
+
+## Gráficos de pastel 
+
+```{r}
+#---- Graficos de pastel ----
+# Tus datos
+nbreaks <- 10
+intervalos <- cut(tiem, breaks = nbreaks); (intervalos)
+tabla <- table(intervalos); (tabla)
+porcentajes <- round(prop.table(tabla) * 100, 1); (porcentajes)
+pie(tabla,
+    main = "Distribución de pesos (10 intervalos)",
+    col = rainbow(length(tabla)),
+    labels = paste0(porcentajes, "%"))
+```
+
+## Gráfica de Ojiva
+
+```{r}
+#---- Grafica de Ojiva ----
+##---- Grafica sencilla ----
+nbreaks <- 10
+h <- hist(tiem, breaks = nbreaks, plot = FALSE)
+freq_acum <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+plot(x_vals, freq_acum, type = "o",
+     main = "Ojiva de Tiempos de traslado en horas",
+     xlab = "Tiempo (h)",
+     ylab = "Frecuencia acumulada (%)",
+     col = "blue", pch = 19, lwd = 2,
+     ylim = c(0, 100))
+abline(h = 100, col = "red", lty = 2)
+```
+
+Mejoramos la gráfica anterior.
+
+```{r}
+##---- Grafica combinada ----
+nbreaks <- 10
+h <- hist(tiem, breaks = nbreaks, plot = FALSE)
+hist(tiem,
+     breaks = nbreaks,
+     col = "lightblue",
+     main = "Histograma y Ojiva (%)",
+     xlab = "Tiempo (h)",
+     ylab = "Frecuencia")
+freq_acum_pct <- cumsum(h$counts) / sum(h$counts) * 100
+x_vals <- h$breaks[-1]
+par(new = TRUE)
+plot(x_vals, freq_acum_pct,
+     type = "o", pch = 19, lwd = 2, col = "red",
+     axes = FALSE, xlab = "", ylab = "",
+     xlim = range(h$breaks), ylim = c(0, 100))
+axis(4)                           # eje derecho
+#---- Fin ----
+```
+
+# Ejercicio *Examen*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los exámenes 
+
+```{r}
+examen <- c("Reprobado", "Aprobado", "Aprobado", "Aprobado", "Aprobado",
+"Reprobado", "Aprobado", "Reprobado", "Reprobado", "Aprobado",
+"Reprobado", "Reprobado", "Reprobado", "Reprobado", "Aprobado",
+"Reprobado", "Reprobado", "Aprobado", "Aprobado", "Reprobado",
+"Aprobado", "Aprobado", "Aprobado", "Aprobado", "Reprobado",
+"Aprobado", "Reprobado", "Aprobado", "Reprobado", "Reprobado",
+"Aprobado", "Reprobado", "Aprobado", "Reprobado", "Aprobado",
+"Reprobado", "Reprobado", "Aprobado", "Reprobado", "Reprobado",
+"Reprobado", "Aprobado", "Aprobado", "Aprobado", "Aprobado",
+"Reprobado", "Reprobado", "Reprobado", "Aprobado", "Reprobado"
+)
+
+# Convertimos la variable a factor (aunque no sea ordinal) para un mejor manejo
+resultados_factor <- factor(examen, levels = c("Aprobado", "Reprobado"))
+```
+
+## Procesamiento de datos
+
+Para variables binarias solo calculamos frecuencias y la moda
+
+```{r}
+# Tabla de frecuencias
+tabla_examen <- table(resultados_factor)
+
+# Porcentajes
+porcentajes <- round(prop.table(tabla_examen) * 100, 1)
+
+# Moda: la categoría con mayor frecuencia
+moda <- names(tabla_examen)[which.max(tabla_examen)]
+
+# Imprimir resultados
+print(tabla_examen)
+print(porcentajes)
+print(paste("La moda es:", moda))
+```
+
+## Gráfica de *barras*
+Es la forma más clara de visualizar las frecuencias de una variable binaria
+
+```{r}
+# Definimos una paleta de colores
+miscolores <- c("darkgreen", "darkred")
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_examen,
+              col = miscolores,
+              main = "Frecuencia de Resultados de Examen",
+              xlab = "Resultado",
+              ylab = "Frecuencia",
+              ylim = c(0, max(tabla_examen) * 1.2),
+              las = 1)
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_examen, labels = tabla_examen, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes 
+
+```{r}
+# Usamos los porcentajes calculados previamente
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = "Porcentaje de Resultados de Examen",
+                  xlab = "Resultado",
+                  ylab = "Porcentaje",
+                  ylim = c(0, 100),
+                  las = 1)
+
+# Añadir etiquetas de porcentaje
+text(x = bp_pct, y = porcentajes, labels = paste0(porcentajes, "%"), pos = 3, cex = 0.8)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_examen,
+    main = "Distribución de Resultados de Examen",
+    col = miscolores,
+    labels = paste0(names(tabla_examen), "\n", porcentajes, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio *COVID*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los Resultados de examnes de COVID
+
+```{r}
+COVID <- c("Negativo", "Positivo", "Negativo", "Negativo", "Negativo", "Positivo",
+"Positivo", "Negativo", "Negativo", "Positivo", "Negativo", "Positivo",
+"Positivo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo",
+"Negativo", "Negativo", "Positivo", "Positivo", "Negativo", "Negativo",
+"Positivo", "Negativo", "Positivo", "Negativo", "Negativo", "Positivo",
+"Positivo", "Negativo", "Positivo", "Positivo", "Negativo", "Positivo",
+"Negativo", "Negativo", "Negativo", "Negativo", "Positivo", "Negativo",
+"Positivo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo",
+"Negativo", "Negativo", "Negativo"
+)
+
+# Convertimos la variable a factor (aunque no sea ordinal) para un mejor manejo
+resultados_COVID <- factor(COVID, levels = c("Negativo", "Positivo"))
+```
+
+## Procesamiento de datos
+
+Para variables binarias solo calculamos frecuencias y la moda
+
+```{r}
+# Tabla de frecuencias
+tabla_COVID <- table(resultados_COVID)
+
+# Porcentajes
+porcentajes <- round(prop.table(tabla_COVID) * 100, 1)
+
+# Moda: la categoría con mayor frecuencia
+moda <- names(tabla_COVID)[which.max(tabla_COVID)]
+
+# Imprimir resultados
+print(tabla_COVID)
+print(porcentajes)
+print(paste("La moda es:", moda))
+```
+
+## Gráfica de *barras*
+Es la forma más clara de visualizar las frecuencias de una variable binaria
+
+```{r}
+# Definimos una paleta de colores
+miscolores <- c("darkgreen", "darkred")
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_COVID,
+              col = miscolores,
+              main = "Frecuencia de Resultados de Examen de COVID",
+              xlab = "Resultado",
+              ylab = "Frecuencia",
+              ylim = c(0, max(tabla_COVID) * 1.2),
+              las = 1)
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_COVID, labels = tabla_COVID, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes 
+
+```{r}
+# Usamos los porcentajes calculados previamente
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = "Porcentaje de Resultados de Examen de COVID",
+                  xlab = "Resultado",
+                  ylab = "Porcentaje",
+                  ylim = c(0, 100),
+                  las = 1)
+
+# Añadir etiquetas de porcentaje
+text(x = bp_pct, y = porcentajes, labels = paste0(porcentajes, "%"), pos = 3, cex = 0.8)
+```
+
+## Gráficos de pastel 
+
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_COVID,
+    main = "Distribución de Resultados de Examen",
+    col = miscolores,
+    labels = paste0(names(tabla_COVID), "\n", porcentajes, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+# Ejercicio *Ocupación*
+
+
+Primero limpiamos nuestro ambiente, eliminamos variables y cerramos las gráficas generadas con anterioridad.
+
+```{r, echo=FALSE}
+rm(list = ls())
+dev.off()
+```
+
+Generemos los datos correspondientes a los pesos registrados de 90 personas
+
+```{r}
+ocupacion <- c("Desempleado", "Estudiante", "Empleado", "Empleado", "Estudiante",
+"Empleado", "Empleado", "Empleado", "Jubilado", "Jubilado",
+"Jubilado", "Jubilado", "Jubilado", "Estudiante", "Desempleado",
+"Desempleado", "Jubilado", "Empleado", "Estudiante", "Estudiante",
+"Empleado", "Desempleado", "Estudiante", "Desempleado", "Jubilado",
+"Empleado", "Jubilado", "Desempleado", "Desempleado", "Desempleado"
+)
+
+# Convertimos la variable a factor para un mejor manejo, sin orden específico.
+ocupacion_factor <- factor(ocupacion)
+```
+
+## Procesamiento de datos
+
+El análisis se centra en las frecuencias y la moda
+
+```{r}
+# Tabla de frecuencias
+tabla_ocupacion <- table(ocupacion_factor)
+
+# Porcentajes
+porcentajes <- round(prop.table(tabla_ocupacion) * 100, 1)
+
+# Moda: la categoría con mayor frecuencia
+moda <- names(tabla_ocupacion)[which.max(tabla_ocupacion)]
+
+# Imprimir resultados
+print(tabla_ocupacion)
+print(porcentajes)
+print(paste("La moda es:", moda))
+```
+
+## Gráficos de barras
+
+Un gráfico de barras es la visualización más adecuada para este tipo de datos
+
+```{r}
+# Tabla de frecuencias
+# Definimos una paleta de colores para todas las categorías
+miscolores <- rainbow(length(levels(ocupacion_factor)))
+
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+
+# Ajustamos los márgenes para que las etiquetas del eje X no se superpongan
+par(mar = c(8, 4, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+# Gráfico de barras de frecuencias absolutas
+bp <- barplot(tabla_ocupacion,
+              col = miscolores,
+              main = "Frecuencia de Ocupaciones",
+              xlab = "Ocupación",
+              ylab = "Frecuencia",
+              ylim = c(0, max(tabla_ocupacion) * 1.2),
+              las = 2) # las=2 rota las etiquetas del eje X para que sean legibles
+
+# Añadir las etiquetas de frecuencia encima de cada barra
+text(x = bp, y = tabla_ocupacion, labels = tabla_ocupacion, pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Gráfico de barras con porcentajes
+
+```{r}
+# Usamos los porcentajes calculados previamente
+# Ajustamos los márgenes nuevamente
+old_par <- par(no.readonly = TRUE)
+par(mar = c(8, 4, 4, 2) + 0.1, mgp = c(5, 1, 0))
+
+bp_pct <- barplot(porcentajes,
+                  col = miscolores,
+                  main = "Porcentaje de Ocupaciones",
+                  xlab = "Ocupación",
+                  ylab = "Porcentaje",
+                  ylim = c(0, max(porcentajes) * 1.2),
+                  las = 2)
+
+# Añadir etiquetas de porcentaje
+text(x = bp_pct, y = porcentajes, labels = paste0(porcentajes, "%"), pos = 3, cex = 0.8)
+
+par(old_par)
+```
+
+## Gráficos de pastel
+
+El gráfico de pastel es otra excelente forma de mostrar la distribución porcentual
+
+```{r}
+# Guardar la configuración de parámetros actual
+old_par <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 4, 2) + 0.1)
+
+pie(tabla_ocupacion,
+    main = "Distribución de Ocupaciones",
+    col = miscolores,
+    labels = paste0(names(tabla_ocupacion), "\n", porcentajes, "%"),
+    radius = 0.8,
+    cex = 0.8)
+
+par(old_par)
+#---- Fin ----
+```
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
