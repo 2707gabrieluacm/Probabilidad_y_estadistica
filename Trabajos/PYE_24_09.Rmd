@@ -1519,4 +1519,11 @@ hist(mibinomial_k100_10000, col="blue",
      main = "10000 VA Binom(k,p)",
      xlab="Num de VA",
      ylab = "Binom(100,0.5)")
+
 ```
+
+# En conclusión
+
+**m** Cuántas veces repetimos el experimento completo
+**k** Cuántas veces se repite el evento individual en CADA experimento
+**p** La probabilidad de que ocurra el evento en cada ensayo individual
