@@ -775,7 +775,7 @@ hist(mibinomial_p96_10000,col="blue",
      ylab = "Binom(25,0.96)")
 ```
 
-### Variando k = 10
+### k = 10
 
 #### N = 100
 
@@ -2537,4 +2537,5 @@ hist(mipoisson_l085_15000, col="lightgreen", main = "15000 VA Pois(0.85)", xlab=
 - El parámetro λ es tanto la media como la varianza de la distribución
 - A medida que aumenta el número de muestras (N), la distribución se aproxima mejor a la forma teórica esperada
 - Con valores pequeños de λ (como 0.15 o 0.30), la distribución está más concentrada en valores bajos
+
 - Con valores mayores de λ (como 0.70 o 0.85), la distribución se vuelve más simétrica y se dispersa más
