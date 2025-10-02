@@ -1,0 +1,2540 @@
+---
+title: "Estadistica y Probabilidad"
+author: "Ortiz Cruz José Gabriel"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 5
+    code_folding: show
+    #theme: flatly
+    theme: journal
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Discretas
+
+## Generacion de Binomial 
+
+### p = 0.30
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 25
+p <- 0.3
+```
+
+```{r}
+mibinomial_p3_100 <- rbinom(n1,k,p)
+```
+
+```{r}
+plot(mibinomial_p3_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p3_100, main="Histograma 100 VA Binom(k,p))",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 25
+p <- 0.3
+```
+
+```{r}
+mibinomial_p3_500 <- rbinom(n2,k,p)
+```
+
+```{r}
+plot(mibinomial_p3_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p3_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 25
+p <- 0.3
+```
+
+```{r}
+mibinomial_p3_1000 <- rbinom(n3,k,p)
+```
+
+```{r}
+plot(mibinomial_p3_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p3_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 25
+p <- 0.3
+```
+
+```{r}
+mibinomial_p3_5000 <- rbinom(n4,k,p)
+```
+
+```{r}
+plot(mibinomial_p3_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p3_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 25
+p <- 0.3
+```
+
+```{r}
+mibinomial_p3_10000 <- rbinom(n5,k,p)
+```
+
+```{r}
+plot(mibinomial_p3_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p3_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+### p = 0.45
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 25
+p <- 0.45
+```
+
+```{r}
+mibinomial_p45_100 <- rbinom(n1,k,p)
+```
+
+```{r}
+plot(mibinomial_p45_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p45_100, main="Histograma 100 VA Binom(k,p))",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 25
+p <- 0.45
+```
+
+```{r}
+mibinomial_p45_500 <- rbinom(n2,k,p)
+```
+
+```{r}
+plot(mibinomial_p45_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p45_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 25
+p <- 0.45
+```
+
+```{r}
+mibinomial_p45_1000 <- rbinom(n3,k,p)
+```
+
+```{r}
+plot(mibinomial_p45_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p45_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 25
+p <- 0.45
+```
+
+```{r}
+mibinomial_p45_5000 <- rbinom(n4,k,p)
+```
+
+```{r}
+plot(mibinomial_p45_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p45_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 25
+p <- 0.45
+```
+
+```{r}
+mibinomial_p45_10000 <- rbinom(n5,k,p)
+```
+
+```{r}
+plot(mibinomial_p45_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p45_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+### p = 0.8
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 25
+p <- 0.8
+```
+
+```{r}
+mibinomial_p8_100 <- rbinom(n1,k,p)
+```
+
+```{r}
+plot(mibinomial_p8_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p8_100, main="Histograma 100 VA Binom(k,p))",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 25
+p <- 0.8
+```
+
+```{r}
+mibinomial_p8_500 <- rbinom(n2,k,p)
+```
+
+```{r}
+plot(mibinomial_p8_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p8_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 25
+p <- 0.8
+```
+
+```{r}
+mibinomial_p8_1000 <- rbinom(n3,k,p)
+```
+
+```{r}
+plot(mibinomial_p8_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p8_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 25
+p <- 0.8
+```
+
+```{r}
+mibinomial_p8_5000 <- rbinom(n4,k,p)
+```
+
+```{r}
+plot(mibinomial_p8_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p8_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 25
+p <- 0.8
+```
+
+```{r}
+mibinomial_p8_10000 <- rbinom(n5,k,p)
+```
+
+```{r}
+plot(mibinomial_p8_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p8_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+### p = 0.96
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 25
+p <- 0.96
+```
+
+```{r}
+mibinomial_p96_100 <- rbinom(n1,k,p)
+```
+
+```{r}
+plot(mibinomial_p96_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p96_100, main="Histograma 100 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 25
+p <- 0.96
+```
+
+```{r}
+mibinomial_p96_500 <- rbinom(n2,k,p)
+```
+
+```{r}
+plot(mibinomial_p96_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p96_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 25
+p <- 0.96
+```
+
+```{r}
+mibinomial_p96_1000 <- rbinom(n3,k,p)
+```
+
+```{r}
+plot(mibinomial_p96_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p96_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 25
+p <- 0.96
+```
+
+```{r}
+mibinomial_p96_5000 <- rbinom(n4,k,p)
+```
+
+```{r}
+plot(mibinomial_p96_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p96_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 25
+p <- 0.96
+```
+
+```{r}
+mibinomial_p96_10000 <- rbinom(n5,k,p)
+```
+
+```{r}
+plot(mibinomial_p96_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,p)")
+```
+
+```{r}
+hist(mibinomial_p96_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,p)")
+```
+
+### Comparacion de graficos Plot
+
+#### Comparando plot de N = 100
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_p3_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+plot(mibinomial_p45_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+plot(mibinomial_p8_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+plot(mibinomial_p96_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+#### Comparando plot de  N = 500
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_p3_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+plot(mibinomial_p45_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+plot(mibinomial_p8_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+plot(mibinomial_p96_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+#### Comparando plot de N = 1000
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_p3_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+plot(mibinomial_p45_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+plot(mibinomial_p8_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+plot(mibinomial_p96_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+#### Comparando plot de N = 5000
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_p3_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+plot(mibinomial_p45_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+plot(mibinomial_p8_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+plot(mibinomial_p96_5000,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+#### Comparando plot de N = 10000
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_p3_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+plot(mibinomial_p45_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+plot(mibinomial_p8_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+plot(mibinomial_p96_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+### Comparacion de graficos Hist
+
+#### Comparando hist de N = 100
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_p3_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+hist(mibinomial_p45_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+hist(mibinomial_p8_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+hist(mibinomial_p96_100,col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+
+#### Comparando hist de N = 500
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_p3_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+hist(mibinomial_p45_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+hist(mibinomial_p8_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+hist(mibinomial_p96_500,col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+#### Comparando hist de N = 1000
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_p3_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+hist(mibinomial_p45_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+hist(mibinomial_p8_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+hist(mibinomial_p96_1000,col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+#### Comparando hist de N = 5000
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_p3_500,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+hist(mibinomial_p45_500,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+hist(mibinomial_p8_500,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+hist(mibinomial_p96_500,col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+
+#### Comparando hist de N = 10000
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_p3_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.30)")
+hist(mibinomial_p45_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.45)")
+hist(mibinomial_p8_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.80)")
+hist(mibinomial_p96_10000,col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.96)")
+```
+
+### Variando k = 10
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 10
+p <- 0.5
+```
+
+```{r}
+mibinomial_k10_100 <- rbinom(n1, k, p)
+```
+
+```{r}
+plot(mibinomial_k10_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+```
+
+```{r}
+hist(mibinomial_k10_100, main="Histograma 100 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(10,0.5)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 10
+p <- 0.5
+```
+
+```{r}
+mibinomial_k10_500 <- rbinom(n2, k, p)
+```
+
+```{r}
+plot(mibinomial_k10_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+```
+
+```{r}
+hist(mibinomial_k10_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(10,0.5)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 10
+p <- 0.5
+```
+
+```{r}
+mibinomial_k10_1000 <- rbinom(n3, k, p)
+```
+
+```{r}
+plot(mibinomial_k10_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+```
+
+```{r}
+hist(mibinomial_k10_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(10,0.5)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 10
+p <- 0.5
+```
+
+```{r}
+mibinomial_k10_5000 <- rbinom(n4, k, p)
+```
+
+```{r}
+plot(mibinomial_k10_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+```
+
+```{r}
+hist(mibinomial_k10_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(10,0.5)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 10
+p <- 0.5
+```
+
+```{r}
+mibinomial_k10_10000 <- rbinom(n5, k, p)
+```
+
+```{r}
+plot(mibinomial_k10_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+```
+
+```{r}
+hist(mibinomial_k10_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(10,0.5)")
+```
+
+### k = 25
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 25
+p <- 0.5
+```
+
+```{r}
+mibinomial_k25_100 <- rbinom(n1, k, p)
+```
+
+```{r}
+plot(mibinomial_k25_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+```
+
+```{r}
+hist(mibinomial_k25_100, main="Histograma 100 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,0.5)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 25
+p <- 0.5
+```
+
+```{r}
+mibinomial_k25_500 <- rbinom(n2, k, p)
+```
+
+```{r}
+plot(mibinomial_k25_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+```
+
+```{r}
+hist(mibinomial_k25_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,0.5)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 25
+p <- 0.5
+```
+
+```{r}
+mibinomial_k25_1000 <- rbinom(n3, k, p)
+```
+
+```{r}
+plot(mibinomial_k25_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+```
+
+```{r}
+hist(mibinomial_k25_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,0.5)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 25
+p <- 0.5
+```
+
+```{r}
+mibinomial_k25_5000 <- rbinom(n4, k, p)
+```
+
+```{r}
+plot(mibinomial_k25_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+```
+
+```{r}
+hist(mibinomial_k25_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,0.5)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 25
+p <- 0.5
+```
+
+```{r}
+mibinomial_k25_10000 <- rbinom(n5, k, p)
+```
+
+```{r}
+plot(mibinomial_k25_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+```
+
+```{r}
+hist(mibinomial_k25_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(25,0.5)")
+```
+
+### k = 50
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 50
+p <- 0.5
+```
+
+```{r}
+mibinomial_k50_100 <- rbinom(n1, k, p)
+```
+
+```{r}
+plot(mibinomial_k50_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+```
+
+```{r}
+hist(mibinomial_k50_100, main="Histograma 100 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(50,0.5)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 50
+p <- 0.5
+```
+
+```{r}
+mibinomial_k50_500 <- rbinom(n2, k, p)
+```
+
+```{r}
+plot(mibinomial_k50_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+```
+
+```{r}
+hist(mibinomial_k50_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(50,0.5)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 50
+p <- 0.5
+```
+
+```{r}
+mibinomial_k50_1000 <- rbinom(n3, k, p)
+```
+
+```{r}
+plot(mibinomial_k50_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+```
+
+```{r}
+hist(mibinomial_k50_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(50,0.5)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 50
+p <- 0.5
+```
+
+```{r}
+mibinomial_k50_5000 <- rbinom(n4, k, p)
+```
+
+```{r}
+plot(mibinomial_k50_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+```
+
+```{r}
+hist(mibinomial_k50_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(50,0.5)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 50
+p <- 0.5
+```
+
+```{r}
+mibinomial_k50_10000 <- rbinom(n5, k, p)
+```
+
+```{r}
+plot(mibinomial_k50_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+```
+
+```{r}
+hist(mibinomial_k50_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(50,0.5)")
+```
+
+### k = 100
+
+#### N = 100
+
+```{r}
+n1 <- 100
+k <- 100
+p <- 0.5
+```
+
+```{r}
+mibinomial_k100_100 <- rbinom(n1, k, p)
+```
+
+```{r}
+plot(mibinomial_k100_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+```{r}
+hist(mibinomial_k100_100, main="Histograma 100 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(100,0.5)")
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+k <- 100
+p <- 0.5
+```
+
+```{r}
+mibinomial_k100_500 <- rbinom(n2, k, p)
+```
+
+```{r}
+plot(mibinomial_k100_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+```{r}
+hist(mibinomial_k100_500, main="Histograma 500 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(100,0.5)")
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+k <- 100
+p <- 0.5
+```
+
+```{r}
+mibinomial_k100_1000 <- rbinom(n3, k, p)
+```
+
+```{r}
+plot(mibinomial_k100_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+```{r}
+hist(mibinomial_k100_1000, main="Histograma 1000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(100,0.5)")
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+k <- 100
+p <- 0.5
+```
+
+```{r}
+mibinomial_k100_5000 <- rbinom(n4, k, p)
+```
+
+```{r}
+plot(mibinomial_k100_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+```{r}
+hist(mibinomial_k100_5000, main="Histograma 5000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(100,0.5)")
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+k <- 100
+p <- 0.5
+```
+
+```{r}
+mibinomial_k100_10000 <- rbinom(n5, k, p)
+```
+
+```{r}
+plot(mibinomial_k100_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+```{r}
+hist(mibinomial_k100_10000, main="Histograma 10000 VA Binom(k,p)",
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = "Binom(100,0.5)")
+```
+
+### Comparacion de gráficos Plot
+
+#### Comparando plot de N = 100
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_k10_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+plot(mibinomial_k25_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+plot(mibinomial_k50_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+plot(mibinomial_k100_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando plot de N = 500
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_k10_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+plot(mibinomial_k25_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+plot(mibinomial_k50_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+plot(mibinomial_k100_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+
+#### Comparando plot de N = 1000
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_k10_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+plot(mibinomial_k25_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+plot(mibinomial_k50_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+plot(mibinomial_k100_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando plot de N = 5000
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_k10_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+plot(mibinomial_k25_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+plot(mibinomial_k50_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+plot(mibinomial_k100_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando plot de N = 10000
+
+```{r}
+par(mfrow = c(2,2))
+plot(mibinomial_k10_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+plot(mibinomial_k25_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+plot(mibinomial_k50_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+plot(mibinomial_k100_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+### Comparacion de gráficos Hist
+
+#### Comparando hist de N = 100
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_k10_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+hist(mibinomial_k25_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+hist(mibinomial_k50_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+hist(mibinomial_k100_100, col="blue",
+     main = "100 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando hist de N = 500
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_k10_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+hist(mibinomial_k25_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+hist(mibinomial_k50_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+hist(mibinomial_k100_500, col="blue",
+     main = "500 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando hist de N = 1000
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_k10_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+hist(mibinomial_k25_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+hist(mibinomial_k50_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+hist(mibinomial_k100_1000, col="blue",
+     main = "1000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando hist de N = 5000
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_k10_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+hist(mibinomial_k25_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+hist(mibinomial_k50_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+hist(mibinomial_k100_5000, col="blue",
+     main = "5000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+```
+
+#### Comparando hist de N = 10000
+
+```{r}
+par(mfrow = c(2,2))
+hist(mibinomial_k10_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(10,0.5)")
+hist(mibinomial_k25_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(25,0.5)")
+hist(mibinomial_k50_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(50,0.5)")
+hist(mibinomial_k100_10000, col="blue",
+     main = "10000 VA Binom(k,p)",
+     xlab="Num de VA",
+     ylab = "Binom(100,0.5)")
+
+```
+
+### En conclusión Binomial
+
+- **m** : Representa el número total de experimentos completos que realizamos. Es decir, cuántas veces llevamos a cabo el conjunto de ensayos.
+
+- **k**: Indica cuántas veces ocurre el evento de interés (los llamados “éxitos”) dentro de esos experimentos. Se utiliza para calcular la probabilidad de observar exactamente ese número de ocurrencias.
+
+- **p**: Es la probabilidad de que ocurra el evento en un solo ensayo individual. Esta probabilidad se mantiene constante en cada repetición, lo que garantiza que la distribución binomial pueda aplicarse correctamente.
+
+## Generación de Poisson
+
+### λ = 0.15
+
+#### N = 100
+
+```{r}
+n1 <- 100
+milambda <- 0.15
+```
+
+```{r}
+mipoisson_l015_100 <- rpois(n1, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n1, ",", milambda, ")")
+mititulo <- paste0(n1, " VA Pois(", milambda, ")")
+plot(mipoisson_l015_100, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n1, " VA Pois(", milambda, ")")
+hist(mipoisson_l015_100, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+milambda <- 0.15
+```
+
+```{r}
+mipoisson_l015_500 <- rpois(n2, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n2, ",", milambda, ")")
+mititulo <- paste0(n2, " VA Pois(", milambda, ")")
+plot(mipoisson_l015_500, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n2, " VA Pois(", milambda, ")")
+hist(mipoisson_l015_500, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+milambda <- 0.15
+```
+
+```{r}
+mipoisson_l015_1000 <- rpois(n3, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n3, ",", milambda, ")")
+mititulo <- paste0(n3, " VA Pois(", milambda, ")")
+plot(mipoisson_l015_1000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n3, " VA Pois(", milambda, ")")
+hist(mipoisson_l015_1000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+milambda <- 0.15
+```
+
+```{r}
+mipoisson_l015_5000 <- rpois(n4, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n4, ",", milambda, ")")
+mititulo <- paste0(n4, " VA Pois(", milambda, ")")
+plot(mipoisson_l015_5000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n4, " VA Pois(", milambda, ")")
+hist(mipoisson_l015_5000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+milambda <- 0.15
+```
+
+```{r}
+mipoisson_l015_10000 <- rpois(n5, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n5, ",", milambda, ")")
+mititulo <- paste0(n5, " VA Pois(", milambda, ")")
+plot(mipoisson_l015_10000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n5, " VA Pois(", milambda, ")")
+hist(mipoisson_l015_10000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 15000
+
+```{r}
+n6 <- 15000
+milambda <- 0.15
+```
+
+```{r}
+mipoisson_l015_15000 <- rpois(n6, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n6, ",", milambda, ")")
+mititulo <- paste0(n6, " VA Pois(", milambda, ")")
+plot(mipoisson_l015_15000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n6, " VA Pois(", milambda, ")")
+hist(mipoisson_l015_15000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+### λ = 0.30
+
+#### N = 100
+
+```{r}
+n1 <- 100
+milambda <- 0.30
+```
+
+```{r}
+mipoisson_l030_100 <- rpois(n1, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n1, ",", milambda, ")")
+mititulo <- paste0(n1, " VA Pois(", milambda, ")")
+plot(mipoisson_l030_100, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n1, " VA Pois(", milambda, ")")
+hist(mipoisson_l030_100, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+milambda <- 0.30
+```
+
+```{r}
+mipoisson_l030_500 <- rpois(n2, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n2, ",", milambda, ")")
+mititulo <- paste0(n2, " VA Pois(", milambda, ")")
+plot(mipoisson_l030_500, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n2, " VA Pois(", milambda, ")")
+hist(mipoisson_l030_500, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+milambda <- 0.30
+```
+
+```{r}
+mipoisson_l030_1000 <- rpois(n3, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n3, ",", milambda, ")")
+mititulo <- paste0(n3, " VA Pois(", milambda, ")")
+plot(mipoisson_l030_1000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n3, " VA Pois(", milambda, ")")
+hist(mipoisson_l030_1000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+milambda <- 0.30
+```
+
+```{r}
+mipoisson_l030_5000 <- rpois(n4, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n4, ",", milambda, ")")
+mititulo <- paste0(n4, " VA Pois(", milambda, ")")
+plot(mipoisson_l030_5000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n4, " VA Pois(", milambda, ")")
+hist(mipoisson_l030_5000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+milambda <- 0.30
+```
+
+```{r}
+mipoisson_l030_10000 <- rpois(n5, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n5, ",", milambda, ")")
+mititulo <- paste0(n5, " VA Pois(", milambda, ")")
+plot(mipoisson_l030_10000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n5, " VA Pois(", milambda, ")")
+hist(mipoisson_l030_10000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 15000
+
+```{r}
+n6 <- 15000
+milambda <- 0.30
+```
+
+```{r}
+mipoisson_l030_15000 <- rpois(n6, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n6, ",", milambda, ")")
+mititulo <- paste0(n6, " VA Pois(", milambda, ")")
+plot(mipoisson_l030_15000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n6, " VA Pois(", milambda, ")")
+hist(mipoisson_l030_15000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+### λ = 0.5
+
+#### N = 100
+
+```{r}
+n1 <- 100
+milambda <- 0.5
+```
+
+```{r}
+mipoisson_l05_100 <- rpois(n1, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n1, ",", milambda, ")")
+mititulo <- paste0(n1, " VA Pois(", milambda, ")")
+plot(mipoisson_l05_100, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n1, " VA Pois(", milambda, ")")
+hist(mipoisson_l05_100, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+milambda <- 0.5
+```
+
+```{r}
+mipoisson_l05_500 <- rpois(n2, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n2, ",", milambda, ")")
+mititulo <- paste0(n2, " VA Pois(", milambda, ")")
+plot(mipoisson_l05_500, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n2, " VA Pois(", milambda, ")")
+hist(mipoisson_l05_500, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+milambda <- 0.5
+```
+
+```{r}
+mipoisson_l05_1000 <- rpois(n3, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n3, ",", milambda, ")")
+mititulo <- paste0(n3, " VA Pois(", milambda, ")")
+plot(mipoisson_l05_1000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n3, " VA Pois(", milambda, ")")
+hist(mipoisson_l05_1000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+milambda <- 0.5
+```
+
+```{r}
+mipoisson_l05_5000 <- rpois(n4, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n4, ",", milambda, ")")
+mititulo <- paste0(n4, " VA Pois(", milambda, ")")
+plot(mipoisson_l05_5000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n4, " VA Pois(", milambda, ")")
+hist(mipoisson_l05_5000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+milambda <- 0.5
+```
+
+```{r}
+mipoisson_l05_10000 <- rpois(n5, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n5, ",", milambda, ")")
+mititulo <- paste0(n5, " VA Pois(", milambda, ")")
+plot(mipoisson_l05_10000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n5, " VA Pois(", milambda, ")")
+hist(mipoisson_l05_10000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 15000
+
+```{r}
+n6 <- 15000
+milambda <- 0.5
+```
+
+```{r}
+mipoisson_l05_15000 <- rpois(n6, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n6, ",", milambda, ")")
+mititulo <- paste0(n6, " VA Pois(", milambda, ")")
+plot(mipoisson_l05_15000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n6, " VA Pois(", milambda, ")")
+hist(mipoisson_l05_15000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+### λ = 0.70
+
+#### N = 100
+
+```{r}
+n1 <- 100
+milambda <- 0.70
+```
+
+```{r}
+mipoisson_l070_100 <- rpois(n1, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n1, ",", milambda, ")")
+mititulo <- paste0(n1, " VA Pois(", milambda, ")")
+plot(mipoisson_l070_100, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n1, " VA Pois(", milambda, ")")
+hist(mipoisson_l070_100, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+milambda <- 0.70
+```
+
+```{r}
+mipoisson_l070_500 <- rpois(n2, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n2, ",", milambda, ")")
+mititulo <- paste0(n2, " VA Pois(", milambda, ")")
+plot(mipoisson_l070_500, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n2, " VA Pois(", milambda, ")")
+hist(mipoisson_l070_500, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+milambda <- 0.70
+```
+
+```{r}
+mipoisson_l070_1000 <- rpois(n3, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n3, ",", milambda, ")")
+mititulo <- paste0(n3, " VA Pois(", milambda, ")")
+plot(mipoisson_l070_1000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n3, " VA Pois(", milambda, ")")
+hist(mipoisson_l070_1000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+milambda <- 0.70
+```
+
+```{r}
+mipoisson_l070_5000 <- rpois(n4, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n4, ",", milambda, ")")
+mititulo <- paste0(n4, " VA Pois(", milambda, ")")
+plot(mipoisson_l070_5000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n4, " VA Pois(", milambda, ")")
+hist(mipoisson_l070_5000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+milambda <- 0.70
+```
+
+```{r}
+mipoisson_l070_10000 <- rpois(n5, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n5, ",", milambda, ")")
+mititulo <- paste0(n5, " VA Pois(", milambda, ")")
+plot(mipoisson_l070_10000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n5, " VA Pois(", milambda, ")")
+hist(mipoisson_l070_10000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 15000
+
+```{r}
+n6 <- 15000
+milambda <- 0.70
+```
+
+```{r}
+mipoisson_l070_15000 <- rpois(n6, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n6, ",", milambda, ")")
+mititulo <- paste0(n6, " VA Pois(", milambda, ")")
+plot(mipoisson_l070_15000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n6, " VA Pois(", milambda, ")")
+hist(mipoisson_l070_15000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+### λ = 0.85
+
+#### N = 100
+
+```{r}
+n1 <- 100
+milambda <- 0.85
+```
+
+```{r}
+mipoisson_l085_100 <- rpois(n1, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n1, ",", milambda, ")")
+mititulo <- paste0(n1, " VA Pois(", milambda, ")")
+plot(mipoisson_l085_100, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n1, " VA Pois(", milambda, ")")
+hist(mipoisson_l085_100, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 500
+
+```{r}
+n2 <- 500
+milambda <- 0.85
+```
+
+```{r}
+mipoisson_l085_500 <- rpois(n2, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n2, ",", milambda, ")")
+mititulo <- paste0(n2, " VA Pois(", milambda, ")")
+plot(mipoisson_l085_500, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n2, " VA Pois(", milambda, ")")
+hist(mipoisson_l085_500, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 1000
+
+```{r}
+n3 <- 1000
+milambda <- 0.85
+```
+
+```{r}
+mipoisson_l085_1000 <- rpois(n3, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n3, ",", milambda, ")")
+mititulo <- paste0(n3, " VA Pois(", milambda, ")")
+plot(mipoisson_l085_1000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n3, " VA Pois(", milambda, ")")
+hist(mipoisson_l085_1000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 5000
+
+```{r}
+n4 <- 5000
+milambda <- 0.85
+```
+
+```{r}
+mipoisson_l085_5000 <- rpois(n4, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n4, ",", milambda, ")")
+mititulo <- paste0(n4, " VA Pois(", milambda, ")")
+plot(mipoisson_l085_5000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n4, " VA Pois(", milambda, ")")
+hist(mipoisson_l085_5000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 10000
+
+```{r}
+n5 <- 10000
+milambda <- 0.85
+```
+
+```{r}
+mipoisson_l085_10000 <- rpois(n5, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n5, ",", milambda, ")")
+mititulo <- paste0(n5, " VA Pois(", milambda, ")")
+plot(mipoisson_l085_10000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n5, " VA Pois(", milambda, ")")
+hist(mipoisson_l085_10000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+#### N = 15000
+
+```{r}
+n6 <- 15000
+milambda <- 0.85
+```
+
+```{r}
+mipoisson_l085_15000 <- rpois(n6, milambda)
+```
+
+```{r}
+etiqueta_Y <- paste0("Poisson(", n6, ",", milambda, ")")
+mititulo <- paste0(n6, " VA Pois(", milambda, ")")
+plot(mipoisson_l085_15000, col="blue",
+     main = mititulo,
+     xlab = "Num de VA",
+     ylab = etiqueta_Y)
+```
+
+```{r}
+mititulo <- paste0("Histograma ", n6, " VA Pois(", milambda, ")")
+hist(mipoisson_l085_15000, main = mititulo,
+     col = "lightgreen",
+     xlab = "VA generadas",
+     ylab = etiqueta_Y)
+```
+
+### Comparación de gráficos Plot
+
+#### Comparando plot de N = 100
+
+```{r}
+par(mfrow = c(3,2))
+plot(mipoisson_l015_100, col="blue", main = "100 VA Pois(0.15)", xlab="Num de VA", ylab = "Poisson(100,0.15)")
+plot(mipoisson_l030_100, col="blue", main = "100 VA Pois(0.30)", xlab="Num de VA", ylab = "Poisson(100,0.30)")
+plot(mipoisson_l05_100, col="blue", main = "100 VA Pois(0.5)", xlab="Num de VA", ylab = "Poisson(100,0.5)")
+plot(mipoisson_l070_100, col="blue", main = "100 VA Pois(0.70)", xlab="Num de VA", ylab = "Poisson(100,0.70)")
+plot(mipoisson_l085_100, col="blue", main = "100 VA Pois(0.85)", xlab="Num de VA", ylab = "Poisson(100,0.85)")
+```
+
+#### Comparando plot de N = 500
+
+```{r}
+par(mfrow = c(3,2))
+plot(mipoisson_l015_500, col="blue", main = "500 VA Pois(0.15)", xlab="Num de VA", ylab = "Poisson(500,0.15)")
+plot(mipoisson_l030_500, col="blue", main = "500 VA Pois(0.30)", xlab="Num de VA", ylab = "Poisson(500,0.30)")
+plot(mipoisson_l05_500, col="blue", main = "500 VA Pois(0.5)", xlab="Num de VA", ylab = "Poisson(500,0.5)")
+plot(mipoisson_l070_500, col="blue", main = "500 VA Pois(0.70)", xlab="Num de VA", ylab = "Poisson(500,0.70)")
+plot(mipoisson_l085_500, col="blue", main = "500 VA Pois(0.85)", xlab="Num de VA", ylab = "Poisson(500,0.85)")
+```
+
+#### Comparando plot de N = 1000
+
+```{r}
+par(mfrow = c(3,2))
+plot(mipoisson_l015_1000, col="blue", main = "1000 VA Pois(0.15)", xlab="Num de VA", ylab = "Poisson(1000,0.15)")
+plot(mipoisson_l030_1000, col="blue", main = "1000 VA Pois(0.30)", xlab="Num de VA", ylab = "Poisson(1000,0.30)")
+plot(mipoisson_l05_1000, col="blue", main = "1000 VA Pois(0.5)", xlab="Num de VA", ylab = "Poisson(1000,0.5)")
+plot(mipoisson_l070_1000, col="blue", main = "1000 VA Pois(0.70)", xlab="Num de VA", ylab = "Poisson(1000,0.70)")
+plot(mipoisson_l085_1000, col="blue", main = "1000 VA Pois(0.85)", xlab="Num de VA", ylab = "Poisson(1000,0.85)")
+```
+
+#### Comparando plot de N = 5000
+
+```{r}
+par(mfrow = c(3,2))
+plot(mipoisson_l015_5000, col="blue", main = "5000 VA Pois(0.15)", xlab="Num de VA", ylab = "Poisson(5000,0.15)")
+plot(mipoisson_l030_5000, col="blue", main = "5000 VA Pois(0.30)", xlab="Num de VA", ylab = "Poisson(5000,0.30)")
+plot(mipoisson_l05_5000, col="blue", main = "5000 VA Pois(0.5)", xlab="Num de VA", ylab = "Poisson(5000,0.5)")
+plot(mipoisson_l070_5000, col="blue", main = "5000 VA Pois(0.70)", xlab="Num de VA", ylab = "Poisson(5000,0.70)")
+plot(mipoisson_l085_5000, col="blue", main = "5000 VA Pois(0.85)", xlab="Num de VA", ylab = "Poisson(5000,0.85)")
+```
+
+#### Comparando plot de N = 10000
+
+```{r}
+par(mfrow = c(3,2))
+plot(mipoisson_l015_10000, col="blue", main = "10000 VA Pois(0.15)", xlab="Num de VA", ylab = "Poisson(10000,0.15)")
+plot(mipoisson_l030_10000, col="blue", main = "10000 VA Pois(0.30)", xlab="Num de VA", ylab = "Poisson(10000,0.30)")
+plot(mipoisson_l05_10000, col="blue", main = "10000 VA Pois(0.5)", xlab="Num de VA", ylab = "Poisson(10000,0.5)")
+plot(mipoisson_l070_10000, col="blue", main = "10000 VA Pois(0.70)", xlab="Num de VA", ylab = "Poisson(10000,0.70)")
+plot(mipoisson_l085_10000, col="blue", main = "10000 VA Pois(0.85)", xlab="Num de VA", ylab = "Poisson(10000,0.85)")
+```
+
+#### Comparando plot de N = 15000
+
+```{r}
+par(mfrow = c(3,2))
+plot(mipoisson_l015_15000, col="blue", main = "15000 VA Pois(0.15)", xlab="Num de VA", ylab = "Poisson(15000,0.15)")
+plot(mipoisson_l030_15000, col="blue", main = "15000 VA Pois(0.30)", xlab="Num de VA", ylab = "Poisson(15000,0.30)")
+plot(mipoisson_l05_15000, col="blue", main = "15000 VA Pois(0.5)", xlab="Num de VA", ylab = "Poisson(15000,0.5)")
+plot(mipoisson_l070_15000, col="blue", main = "15000 VA Pois(0.70)", xlab="Num de VA", ylab = "Poisson(15000,0.70)")
+plot(mipoisson_l085_15000, col="blue", main = "15000 VA Pois(0.85)", xlab="Num de VA", ylab = "Poisson(15000,0.85)")
+```
+
+### Comparación de gráficos Hist
+
+#### Comparando hist de N = 100
+
+```{r}
+par(mfrow = c(3,2))
+hist(mipoisson_l015_100, col="lightgreen", main = "100 VA Pois(0.15)", xlab="VA generadas", ylab = "Poisson(100,0.15)")
+hist(mipoisson_l030_100, col="lightgreen", main = "100 VA Pois(0.30)", xlab="VA generadas", ylab = "Poisson(100,0.30)")
+hist(mipoisson_l05_100, col="lightgreen", main = "100 VA Pois(0.5)", xlab="VA generadas", ylab = "Poisson(100,0.5)")
+hist(mipoisson_l070_100, col="lightgreen", main = "100 VA Pois(0.70)", xlab="VA generadas", ylab = "Poisson(100,0.70)")
+hist(mipoisson_l085_100, col="lightgreen", main = "100 VA Pois(0.85)", xlab="VA generadas", ylab = "Poisson(100,0.85)")
+```
+
+#### Comparando hist de N = 500
+
+```{r}
+par(mfrow = c(3,2))
+hist(mipoisson_l015_500, col="lightgreen", main = "500 VA Pois(0.15)", xlab="VA generadas", ylab = "Poisson(500,0.15)")
+hist(mipoisson_l030_500, col="lightgreen", main = "500 VA Pois(0.30)", xlab="VA generadas", ylab = "Poisson(500,0.30)")
+hist(mipoisson_l05_500, col="lightgreen", main = "500 VA Pois(0.5)", xlab="VA generadas", ylab = "Poisson(500,0.5)")
+hist(mipoisson_l070_500, col="lightgreen", main = "500 VA Pois(0.70)", xlab="VA generadas", ylab = "Poisson(500,0.70)")
+hist(mipoisson_l085_500, col="lightgreen", main = "500 VA Pois(0.85)", xlab="VA generadas", ylab = "Poisson(500,0.85)")
+```
+
+#### Comparando hist de N = 1000
+
+```{r}
+par(mfrow = c(3,2))
+hist(mipoisson_l015_1000, col="lightgreen", main = "1000 VA Pois(0.15)", xlab="VA generadas", ylab = "Poisson(1000,0.15)")
+hist(mipoisson_l030_1000, col="lightgreen", main = "1000 VA Pois(0.30)", xlab="VA generadas", ylab = "Poisson(1000,0.30)")
+hist(mipoisson_l05_1000, col="lightgreen", main = "1000 VA Pois(0.5)", xlab="VA generadas", ylab = "Poisson(1000,0.5)")
+hist(mipoisson_l070_1000, col="lightgreen", main = "1000 VA Pois(0.70)", xlab="VA generadas", ylab = "Poisson(1000,0.70)")
+hist(mipoisson_l085_1000, col="lightgreen", main = "1000 VA Pois(0.85)", xlab="VA generadas", ylab = "Poisson(1000,0.85)")
+```
+
+#### Comparando hist de N = 5000
+
+```{r}
+par(mfrow = c(3,2))
+hist(mipoisson_l015_5000, col="lightgreen", main = "5000 VA Pois(0.15)", xlab="VA generadas", ylab = "Poisson(5000,0.15)")
+hist(mipoisson_l030_5000, col="lightgreen", main = "5000 VA Pois(0.30)", xlab="VA generadas", ylab = "Poisson(5000,0.30)")
+hist(mipoisson_l05_5000, col="lightgreen", main = "5000 VA Pois(0.5)", xlab="VA generadas", ylab = "Poisson(5000,0.5)")
+hist(mipoisson_l070_5000, col="lightgreen", main = "5000 VA Pois(0.70)", xlab="VA generadas", ylab = "Poisson(5000,0.70)")
+hist(mipoisson_l085_5000, col="lightgreen", main = "5000 VA Pois(0.85)", xlab="VA generadas", ylab = "Poisson(5000,0.85)")
+```
+
+#### Comparando hist de N = 10000
+
+```{r}
+par(mfrow = c(3,2))
+hist(mipoisson_l015_10000, col="lightgreen", main = "10000 VA Pois(0.15)", xlab="VA generadas", ylab = "Poisson(10000,0.15)")
+hist(mipoisson_l030_10000, col="lightgreen", main = "10000 VA Pois(0.30)", xlab="VA generadas", ylab = "Poisson(10000,0.30)")
+hist(mipoisson_l05_10000, col="lightgreen", main = "10000 VA Pois(0.5)", xlab="VA generadas", ylab = "Poisson(10000,0.5)")
+hist(mipoisson_l070_10000, col="lightgreen", main = "10000 VA Pois(0.70)", xlab="VA generadas", ylab = "Poisson(10000,0.70)")
+hist(mipoisson_l085_10000, col="lightgreen", main = "10000 VA Pois(0.85)", xlab="VA generadas", ylab = "Poisson(10000,0.85)")
+```
+
+#### Comparando hist de N = 15000
+
+```{r}
+par(mfrow = c(3,2))
+hist(mipoisson_l015_15000, col="lightgreen", main = "15000 VA Pois(0.15)", xlab="VA generadas", ylab = "Poisson(15000,0.15)")
+hist(mipoisson_l030_15000, col="lightgreen", main = "15000 VA Pois(0.30)", xlab="VA generadas", ylab = "Poisson(15000,0.30)")
+hist(mipoisson_l05_15000, col="lightgreen", main = "15000 VA Pois(0.5)", xlab="VA generadas", ylab = "Poisson(15000,0.5)")
+hist(mipoisson_l070_15000, col="lightgreen", main = "15000 VA Pois(0.70)", xlab="VA generadas", ylab = "Poisson(15000,0.70)")
+hist(mipoisson_l085_15000, col="lightgreen", main = "15000 VA Pois(0.85)", xlab="VA generadas", ylab = "Poisson(15000,0.85)")
+```
+
+### En conclusión Poisson
+
+**Función rpois(n, lambda)**
+
+- **n**: Número de variables aleatorias a generar (tamaño de muestra)
+- **lambda (λ)**: Parámetro de la distribución de Poisson que representa la tasa promedio de ocurrencia de eventos en un intervalo determinado
+
+**Características principales:**
+- La distribución de Poisson modela el número de eventos que ocurren en un intervalo fijo de tiempo o espacio
+- El parámetro λ es tanto la media como la varianza de la distribución
+- A medida que aumenta el número de muestras (N), la distribución se aproxima mejor a la forma teórica esperada
+- Con valores pequeños de λ (como 0.15 o 0.30), la distribución está más concentrada en valores bajos
+- Con valores mayores de λ (como 0.70 o 0.85), la distribución se vuelve más simétrica y se dispersa más
